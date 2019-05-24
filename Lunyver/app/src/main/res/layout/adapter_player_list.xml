@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_player_list"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/button_less_list"
+        android:layout_width="14dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_less"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_player_list"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toEndOf="@+id/button_less_list"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/race_werewolf" />
+
+    <ImageView
+        android:id="@+id/image_level_list"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/level" />
+
+    <TextView
+        android:id="@+id/text_player_name_list"
+        android:layout_width="170dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Snargol"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/titre"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/image_level_list"
+        app:layout_constraintStart_toEndOf="@+id/image_player_list"
+        app:layout_constraintTop_toTopOf="@+id/image_player_list" />
+
+    <TextView
+        android:id="@+id/text_attack_list"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:text="20"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/little_titre"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/text_player_name_list"
+        app:layout_constraintTop_toBottomOf="@+id/text_player_name_list" />
+
+    <TextView
+        android:id="@+id/text_defense_list"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="20"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/little_titre"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/text_life_list"
+        app:layout_constraintStart_toEndOf="@+id/text_attack_list"
+        app:layout_constraintTop_toBottomOf="@+id/text_player_name_list" />
+
+    <TextView
+        android:id="@+id/text_life_list"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:text="20"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/little_titre"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/image_heart_list"
+        app:layout_constraintTop_toBottomOf="@+id/text_player_name_list" />
+
+    <ImageView
+        android:id="@+id/image_class_list"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:srcCompat="@drawable/class_thief"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/image_player_list"
+        app:layout_constraintTop_toBottomOf="@+id/text_attack_list"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/image_sword_list"
+        android:layout_width="25dp"
+        android:layout_height="27dp"
+        app:layout_constraintStart_toEndOf="@+id/text_attack_list"
+        app:layout_constraintTop_toTopOf="@+id/text_attack_list"
+        app:srcCompat="@drawable/sword" />
+
+    <ImageView
+        android:id="@+id/image_heart_list"
+        android:layout_width="25dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/text_player_name_list"
+        app:layout_constraintTop_toBottomOf="@+id/text_player_name_list"
+        app:srcCompat="@drawable/heart" />
+
+    <ImageView
+        android:id="@+id/image_shield_list"
+        android:layout_width="23dp"
+        android:layout_height="27dp"
+        app:layout_constraintStart_toEndOf="@+id/text_defense_list"
+        app:layout_constraintTop_toTopOf="@+id/text_defense_list"
+        app:srcCompat="@drawable/shield" />
+
+    <TextView
+        android:id="@+id/text_level_list"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:text="20"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/little_titre"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/image_level_list"
+        app:layout_constraintEnd_toEndOf="@+id/image_level_list"
+        app:layout_constraintStart_toStartOf="@+id/image_level_list"
+        app:layout_constraintTop_toTopOf="@+id/image_level_list" />
+
+</android.support.constraint.ConstraintLayout>

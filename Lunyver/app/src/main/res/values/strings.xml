@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">LUNYVER</string>
+    <string name="valid">Valider</string>
+    <string name="start_quizz">Commencer le Quizz</string>
+    <string name="helpGetText">Veuillez saisir du texte</string>
+    <string name="classical_game">Partie Classique</string>
+    <string name="battle_royal">Battle Royal (A Venir)</string>
+    <string name="capture_flag">Attrappe le drapeau (A Venir)</string>
+    <string name="game4">A venir</string>
+    <string name="titlePlayers">Personnages</string>
+</resources>
