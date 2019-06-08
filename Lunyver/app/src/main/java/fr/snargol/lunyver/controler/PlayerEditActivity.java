@@ -199,3 +199,7 @@ public class PlayerEditActivity extends AppCompatActivity {
         this.position = position;
     }
 }
+//
+//imgView .setVisibility(View.VISIBLE);
+//
+//        imgView .setVisibility(View.INVISIBLE);
