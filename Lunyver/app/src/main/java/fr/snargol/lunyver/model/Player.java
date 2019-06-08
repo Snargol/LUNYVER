@@ -1,9 +1,11 @@
 package fr.snargol.lunyver.model;
 
+import java.io.Serializable;
+
 import fr.snargol.lunyver.model.Enums.Class;
 import fr.snargol.lunyver.model.Enums.Race;
 
-public class Player {
+public class Player implements Serializable {
 
     private String _name;
     private int _attack = 0;
@@ -27,6 +29,18 @@ public class Player {
         this._defense = _defense;
         this._class = _class;
         this._race = _race;
+    }
+
+    public Player(String _name, Race _race, Class _class, int _attack, int _defense, int _life, int _level, int _contributed_money, Boolean _isAlive) {
+        set_name(_name);
+        set_attack(_attack);
+        set_defense(_defense);
+        set_life(_life);
+        set_class(_class);
+        set_race(_race);
+        set_level(_level);
+        set_contributed_money(_contributed_money);
+        set_isAlive(_isAlive);
     }
 
     public String get_name() {

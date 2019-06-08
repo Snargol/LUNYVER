@@ -6,21 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/button_less_list"
-        android:layout_width="14dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:focusableInTouchMode="false"
-        android:clickable="false"
-        android:focusable="false"
-        android:background="@drawable/button_less"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/image_player_list"
@@ -37,6 +22,19 @@
         app:srcCompat="@drawable/race_werewolf" />
 
     <ImageView
+        android:id="@+id/image_class_list"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/image_player_list"
+        app:layout_constraintTop_toBottomOf="@+id/image_player_list"
+        android:focusableInTouchMode="false"
+        android:clickable="false"
+        android:focusable="false"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/class_thief" />
+
+    <ImageView
         android:id="@+id/image_level_list"
         android:layout_width="41dp"
         android:layout_height="42dp"
@@ -51,6 +49,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/level" />
+
+    <TextView
+        android:id="@+id/text_level_list"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:text="20"
+        android:focusableInTouchMode="false"
+        android:clickable="false"
+        android:focusable="false"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/little_titre"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/image_level_list"
+        app:layout_constraintEnd_toEndOf="@+id/image_level_list"
+        app:layout_constraintStart_toStartOf="@+id/image_level_list"
+        app:layout_constraintTop_toTopOf="@+id/image_level_list" />
+
 
     <TextView
         android:id="@+id/text_player_name_list"
@@ -72,6 +88,40 @@
         app:layout_constraintEnd_toStartOf="@+id/image_level_list"
         app:layout_constraintStart_toEndOf="@+id/image_player_list"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_sword_list"
+        android:layout_width="25dp"
+        android:layout_height="27dp"
+        app:layout_constraintStart_toEndOf="@+id/text_attack_list"
+        app:layout_constraintTop_toTopOf="@+id/text_attack_list"
+        android:focusableInTouchMode="false"
+        android:clickable="false"
+        android:focusable="false"
+        app:srcCompat="@drawable/sword" />
+
+    <ImageView
+        android:id="@+id/image_heart_list"
+        android:layout_width="25dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/text_player_name_list"
+        app:layout_constraintTop_toBottomOf="@+id/text_player_name_list"
+        android:focusableInTouchMode="false"
+        android:clickable="false"
+        android:focusable="false"
+        app:srcCompat="@drawable/heart" />
+
+    <ImageView
+        android:id="@+id/image_shield_list"
+        android:layout_width="23dp"
+        android:layout_height="27dp"
+        app:layout_constraintStart_toEndOf="@+id/text_defense_list"
+        app:layout_constraintTop_toTopOf="@+id/text_defense_list"
+        android:focusableInTouchMode="false"
+        android:clickable="false"
+        android:focusable="false"
+        app:srcCompat="@drawable/shield" />
 
     <TextView
         android:id="@+id/text_attack_list"
@@ -127,69 +177,5 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/image_heart_list"
         app:layout_constraintTop_toBottomOf="@+id/text_player_name_list" />
-
-    <ImageView
-        android:id="@+id/image_class_list"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/image_player_list"
-        app:layout_constraintTop_toBottomOf="@+id/image_player_list"
-        android:focusableInTouchMode="false"
-        android:clickable="false"
-        android:focusable="false"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/class_thief" />
-
-    <ImageView
-        android:id="@+id/image_sword_list"
-        android:layout_width="25dp"
-        android:layout_height="27dp"
-        app:layout_constraintStart_toEndOf="@+id/text_attack_list"
-        app:layout_constraintTop_toTopOf="@+id/text_attack_list"
-        android:focusableInTouchMode="false"
-        android:clickable="false"
-        android:focusable="false"
-        app:srcCompat="@drawable/sword" />
-
-    <ImageView
-        android:id="@+id/image_heart_list"
-        android:layout_width="25dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="@+id/text_player_name_list"
-        app:layout_constraintTop_toBottomOf="@+id/text_player_name_list"
-        android:focusableInTouchMode="false"
-        android:clickable="false"
-        android:focusable="false"
-        app:srcCompat="@drawable/heart" />
-
-    <ImageView
-        android:id="@+id/image_shield_list"
-        android:layout_width="23dp"
-        android:layout_height="27dp"
-        app:layout_constraintStart_toEndOf="@+id/text_defense_list"
-        app:layout_constraintTop_toTopOf="@+id/text_defense_list"
-        android:focusableInTouchMode="false"
-        android:clickable="false"
-        android:focusable="false"
-        app:srcCompat="@drawable/shield" />
-
-    <TextView
-        android:id="@+id/text_level_list"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:text="20"
-        android:focusableInTouchMode="false"
-        android:clickable="false"
-        android:focusable="false"
-        android:textAlignment="center"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/little_titre"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/image_level_list"
-        app:layout_constraintEnd_toEndOf="@+id/image_level_list"
-        app:layout_constraintStart_toStartOf="@+id/image_level_list"
-        app:layout_constraintTop_toTopOf="@+id/image_level_list" />
 
 </android.support.constraint.ConstraintLayout>

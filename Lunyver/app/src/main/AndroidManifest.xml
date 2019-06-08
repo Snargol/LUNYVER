@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".controler.PlayersActivity"></activity>
+        <activity android:name=".controler.PlayerEditActivity" />
+        <activity android:name=".controler.PlayersActivity" />
         <activity android:name=".controler.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

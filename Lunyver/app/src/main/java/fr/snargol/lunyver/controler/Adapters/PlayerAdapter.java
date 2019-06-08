@@ -2,10 +2,12 @@ package fr.snargol.lunyver.controler.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,44 +16,43 @@ import java.util.List;
 import fr.snargol.lunyver.R;
 import fr.snargol.lunyver.model.Player;
 
-public class PlayerAdapter extends BaseAdapter {
+public class PlayerAdapter extends ArrayAdapter<String> {
 
     private Context context;
     private List<Player> players_list;
-    private LayoutInflater inflater;
 
-    public PlayerAdapter(Context context, List<Player> players_list) {
+    public PlayerAdapter(Context context, List<Player> players_list, String[] names) {
+        super(context, R.layout.adapter_player_list, R.id.text_player_name_list, names);
         this.context = context;
         this.players_list = players_list;
-        this.inflater = LayoutInflater.from(context);
     }
 
-
-    @Override
-    public int getCount() {
-        return players_list.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
+    //    @Override
+//    public int getCount() {
+//        return players_list.size();
+//    }
+//
+//    @Override
+    public Player getPlayer(int position) {
         return players_list.get(position);
     }
-
+//
+//    @Override
+//    public long getItemId(int position) {
+//        return 0;
+//    }
+    @NonNull
     @Override
-    public long getItemId(int position) {
-        return 0;
-    }
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View row = inflater.inflate(R.layout.adapter_player_list, parent, false);
 
-    @SuppressLint("ViewHolder")
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+//        convertView = inflater.inflate(R.layout.adapter_player_list, parent, false);
 
-        convertView = inflater.inflate(R.layout.adapter_player_list, null);
+        Player currentPlayer = (Player) getPlayer(position);
+        setDatasOnView(currentPlayer, row);
 
-        Player currentPlayer = (Player) getItem(position);
-        setDatasOnView(currentPlayer, convertView);
-
-        return convertView;
+        return row;
     }
 
     @SuppressLint("SetTextI18n")
@@ -80,6 +81,5 @@ public class PlayerAdapter extends BaseAdapter {
         String ressourceName2 = "class_" + player.get_class();
         int resId2 = context.getResources().getIdentifier(ressourceName2.toLowerCase(), "drawable", context.getPackageName());
         playerClass.setImageResource(resId2);
-
     }
 }
