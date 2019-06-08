@@ -115,5 +115,7 @@ public class Player implements Serializable {
         this._isAlive = _isAlive;
     }
 
-
+    public void add_level(int levelsToAdd){
+        set_level(get_level()+levelsToAdd);
+    }
 }

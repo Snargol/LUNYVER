@@ -65,24 +65,25 @@ public class PlayersActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent playersEditActivity = new Intent(getApplicationContext(), PlayerEditActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("player_list", player_list.get(position));
+                bundle.putSerializable("player_list", player_list);
                 playersEditActivity.putExtras(bundle);
+                playersEditActivity.putExtra("position", position);
                 startActivity(playersEditActivity);
                 finish();
             }
         });
 
-        Button buttonAddPlayer = (Button) findViewById(R.id.button_add_player);
-        buttonAddPlayer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    saveDatas(player_list, FILE_NAME);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+//        Button buttonAddPlayer = (Button) findViewById(R.id.button_add_player);
+//        buttonAddPlayer.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                try {
+//                    saveDatas(player_list, FILE_NAME);
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 
         Button buttondes = (Button) findViewById(R.id.button_des);
         buttondes.setOnClickListener(new View.OnClickListener() {
@@ -109,26 +110,26 @@ public class PlayersActivity extends AppCompatActivity {
     }
 
 
-    public void saveDatas(ArrayList<Player> player_list, String file_name) throws FileNotFoundException {
-        FileOutputStream file = null;
-
-
-        file = openFileOutput(file_name, MODE_PRIVATE);
-
-        for (Player player: player_list) {
-            try {
-                String string = player.get_name() + "|" + player.get_race() + "|" +
-                        player.get_class() + "|" + player.get_attack() + "|" + player.get_defense() + "|" +
-                        player.get_life() + "|" + player.get_level() + "|" + player.get_contributed_money() + "|" +
-                        player.get_isAlive()+"|/";
-                file.write(string.getBytes());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        Toast.makeText(getApplicationContext(), "Saved to "+ getFilesDir() + "/" + file_name, Toast.LENGTH_LONG).show();
-    }
+//    public void saveDatas(ArrayList<Player> player_list, String file_name) throws FileNotFoundException {
+//        FileOutputStream file = null;
+//
+//
+//        file = openFileOutput(file_name, MODE_PRIVATE);
+//
+//        for (Player player: player_list) {
+//            try {
+//                String string = player.get_name() + "|" + player.get_race() + "|" +
+//                        player.get_class() + "|" + player.get_attack() + "|" + player.get_defense() + "|" +
+//                        player.get_life() + "|" + player.get_level() + "|" + player.get_contributed_money() + "|" +
+//                        player.get_isAlive()+"|/";
+//                file.write(string.getBytes());
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        Toast.makeText(getApplicationContext(), "Saved to "+ getFilesDir() + "/" + file_name, Toast.LENGTH_LONG).show();
+//    }
 
 
     public ArrayList<Player> loadDatas(String file_name) throws IOException {
