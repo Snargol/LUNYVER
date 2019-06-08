@@ -115,7 +115,19 @@ public class Player implements Serializable {
         this._isAlive = _isAlive;
     }
 
-    public void add_level(int levelsToAdd){
-        set_level(get_level()+levelsToAdd);
+    public void add_level(int valueToAdd){
+        set_level(get_level()+valueToAdd);
+    }
+
+    public void add_attack(int valueToAdd){
+        set_attack(get_attack()+valueToAdd);
+    }
+
+    public void add_defense(int valueToAdd){
+        set_defense(get_defense()+valueToAdd);
+    }
+
+    public void add_life(int valueToAdd){
+        set_life(get_life()+valueToAdd);
     }
 }

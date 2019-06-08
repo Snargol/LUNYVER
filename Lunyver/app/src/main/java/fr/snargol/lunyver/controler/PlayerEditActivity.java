@@ -58,11 +58,75 @@ public class PlayerEditActivity extends AppCompatActivity {
     public void setOnClick() {
         final TextView playerLevel = findViewById(R.id.player_edit_level);
         Button but_up_level = findViewById(R.id.player_edit_but_up_level);
+        Button but_down_level = findViewById(R.id.player_edit_but_down_level);
         but_up_level.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getPlayer_list().get(getPosition()).add_level(1);
                 playerLevel.setText(String.valueOf(getPlayer_list().get(getPosition()).get_level()));
+            }
+        });
+        but_down_level.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPlayer_list().get(getPosition()).add_level(-1);
+                playerLevel.setText(String.valueOf(getPlayer_list().get(getPosition()).get_level()));
+            }
+        });
+
+
+        final TextView playerAttack = findViewById(R.id.player_edit_attack);
+        Button but_up_attack = findViewById(R.id.player_edit_but_up_attack);
+        Button but_down_attack = findViewById(R.id.player_edit_but_down_attack);
+        but_up_attack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPlayer_list().get(getPosition()).add_attack(1);
+                playerAttack.setText(String.valueOf(getPlayer_list().get(getPosition()).get_attack()));
+            }
+        });
+        but_down_attack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPlayer_list().get(getPosition()).add_attack(-1);
+                playerAttack.setText(String.valueOf(getPlayer_list().get(getPosition()).get_attack()));
+            }
+        });
+
+        final TextView playerDefense= findViewById(R.id.player_edit_defense);
+        Button but_up_defense = findViewById(R.id.player_edit_but_up_defense);
+        Button but_down_defense = findViewById(R.id.player_edit_but_down_defense);
+        but_up_defense.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPlayer_list().get(getPosition()).add_defense(1);
+                playerDefense.setText(String.valueOf(getPlayer_list().get(getPosition()).get_defense()));
+            }
+        });
+        but_down_defense.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPlayer_list().get(getPosition()).add_defense(-1);
+                playerDefense.setText(String.valueOf(getPlayer_list().get(getPosition()).get_defense()));
+            }
+        });
+
+
+        final TextView playerLife = findViewById(R.id.player_edit_life);
+        Button but_up_life = findViewById(R.id.player_edit_but_up_life);
+        Button but_down_life = findViewById(R.id.player_edit_but_down_life);
+        but_up_life.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPlayer_list().get(getPosition()).add_life(1);
+                playerLife.setText(String.valueOf(getPlayer_list().get(getPosition()).get_life()));
+            }
+        });
+        but_down_life.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPlayer_list().get(getPosition()).add_life(-1);
+                playerLife.setText(String.valueOf(getPlayer_list().get(getPosition()).get_life()));
             }
         });
     }
@@ -112,7 +176,7 @@ public class PlayerEditActivity extends AppCompatActivity {
             }
         }
 
-        Toast.makeText(getApplicationContext(), "Saved to "+ getFilesDir() + "/" + file_name, Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), "Saved to "+ getFilesDir() + "/" + file_name, Toast.LENGTH_LONG).show();
     }
 
     public ArrayList<Player> getPlayer_list() {

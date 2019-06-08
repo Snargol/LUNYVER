@@ -186,7 +186,6 @@ public class PlayersActivity extends AppCompatActivity {
                 z += 9;
             }
 
-            Toast.makeText(getApplicationContext()," name : " +  playerList.get(0).get_name() , Toast.LENGTH_LONG).show();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
