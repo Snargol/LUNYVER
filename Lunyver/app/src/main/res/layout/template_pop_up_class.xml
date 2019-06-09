@@ -1,70 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="370dp"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    tools:layout_editor_absoluteX="21dp"
+    tools:layout_editor_absoluteY="273dp">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <ImageButton
+        android:id="@+id/pop_up_class_but_thief"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView10"
-        app:layout_constraintEnd_toStartOf="@+id/imageView10"
-        app:layout_constraintTop_toTopOf="@+id/imageView10"
-        app:srcCompat="@drawable/class_thief" />
+        android:src="@drawable/class_thief"
+        android:background="@null"
+        android:scaleType="fitXY"
+        android:padding="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_class_but_flash"
+        app:layout_constraintEnd_toStartOf="@+id/pop_up_class_but_flash"
+        app:layout_constraintTop_toTopOf="@+id/pop_up_class_but_flash"
+         />
 
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <ImageButton
+        android:id="@+id/pop_up_class_but_archer"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView9"
-        app:layout_constraintStart_toEndOf="@+id/imageView9"
-        app:layout_constraintTop_toTopOf="@+id/imageView9"
+        android:background="@null"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_class_but_berserk"
+        app:layout_constraintStart_toEndOf="@+id/pop_up_class_but_berserk"
+        app:layout_constraintTop_toTopOf="@+id/pop_up_class_but_berserk"
         app:srcCompat="@drawable/class_archer" />
 
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <ImageButton
+        android:id="@+id/pop_up_class_but_berserk"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginTop="32dp"
+        android:background="@null"
+        android:scaleType="fitXY"
         app:layout_constraintStart_toEndOf="@+id/imageView13"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:srcCompat="@drawable/class_berserk" />
 
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <ImageButton
+        android:id="@+id/pop_up_class_but_flash"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView12"
-        app:layout_constraintEnd_toStartOf="@+id/imageView12"
-        app:layout_constraintTop_toTopOf="@+id/imageView12"
+        android:background="@null"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_class_but_trainer"
+        app:layout_constraintEnd_toStartOf="@+id/pop_up_class_but_trainer"
+        app:layout_constraintTop_toTopOf="@+id/pop_up_class_but_trainer"
         app:srcCompat="@drawable/class_flash" />
 
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <ImageButton
+        android:id="@+id/pop_up_class_but_protector"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-        app:layout_constraintStart_toEndOf="@+id/imageView8"
-        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        android:background="@null"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_class_but_archer"
+        app:layout_constraintStart_toEndOf="@+id/pop_up_class_but_archer"
+        app:layout_constraintTop_toTopOf="@+id/pop_up_class_but_archer"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/class_protector" />
 
-    <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <ImageButton
+        android:id="@+id/pop_up_class_but_trainer"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginTop="32dp"
+        android:background="@null"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toStartOf="@+id/imageView13"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:srcCompat="@drawable/class_trainer" />
@@ -78,27 +94,27 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:textColor="@color/colorBlack"
         android:text="@string/chose_class"
+        android:textColor="@color/colorBlack"
         android:textSize="@dimen/little_titre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/pop_up_class_but_annul"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="@string/annul"
         android:background="@color/colorRed"
-        app:layout_constraintEnd_toEndOf="@+id/imageView12"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+        android:text="@string/annul"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_class_but_trainer"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_class_but_flash" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/pop_up_class_but_valid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -106,8 +122,8 @@
         android:layout_marginTop="20dp"
         android:background="@color/colorGreen"
         android:text="@string/valid"
-        app:layout_constraintStart_toStartOf="@+id/imageView9"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+        app:layout_constraintStart_toStartOf="@+id/pop_up_class_but_berserk"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_class_but_archer" />
 
     <ImageView
         android:id="@+id/imageView13"
@@ -124,71 +140,86 @@
         app:srcCompat="@drawable/button_param" />
 
     <ImageView
-        android:id="@+id/imageView14"
+        android:id="@+id/pop_up_class_but_thief_valid"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/imageView3"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_class_but_thief"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_class_but_thief"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_class_but_thief"
+        app:layout_constraintTop_toTopOf="@+id/pop_up_class_but_thief"
         app:srcCompat="@drawable/green_border" />
 
     <ImageView
-        android:id="@+id/imageView15"
+        android:id="@+id/pop_up_class_but_protector_valid"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView11"
-        app:layout_constraintEnd_toEndOf="@+id/imageView11"
-        app:layout_constraintStart_toStartOf="@+id/imageView11"
-        app:layout_constraintTop_toTopOf="@+id/imageView11"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_class_but_protector"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_class_but_protector"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_class_but_protector"
+        app:layout_constraintTop_toTopOf="@+id/pop_up_class_but_protector"
         app:srcCompat="@drawable/green_border" />
 
     <ImageView
-        android:id="@+id/imageView16"
+        android:id="@+id/pop_up_class_but_archer_valid"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-        app:layout_constraintEnd_toEndOf="@+id/imageView8"
-        app:layout_constraintStart_toStartOf="@+id/imageView8"
-        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_class_but_archer"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_class_but_archer"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_class_but_archer"
+        app:layout_constraintTop_toTopOf="@+id/pop_up_class_but_archer"
         app:srcCompat="@drawable/green_border" />
 
     <ImageView
-        android:id="@+id/imageView17"
+        android:id="@+id/pop_up_class_but_berserk_valid"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView9"
-        app:layout_constraintEnd_toEndOf="@+id/imageView9"
-        app:layout_constraintStart_toStartOf="@+id/imageView9"
-        app:layout_constraintTop_toTopOf="@+id/imageView9"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_class_but_berserk"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_class_but_berserk"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_class_but_berserk"
+        app:layout_constraintTop_toTopOf="@+id/pop_up_class_but_berserk"
         app:srcCompat="@drawable/green_border" />
 
     <ImageView
-        android:id="@+id/imageView18"
+        android:id="@+id/pop_up_class_but_trainer_valid"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView12"
-        app:layout_constraintEnd_toEndOf="@+id/imageView12"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageView12"
-        app:layout_constraintTop_toTopOf="@+id/imageView12"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_class_but_trainer"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_class_but_trainer"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_class_but_trainer"
+        app:layout_constraintTop_toTopOf="@+id/pop_up_class_but_trainer"
         app:srcCompat="@drawable/green_border" />
 
     <ImageView
-        android:id="@+id/imageView19"
+        android:id="@+id/pop_up_class_but_flash_valid"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView10"
-        app:layout_constraintEnd_toEndOf="@+id/imageView10"
-        app:layout_constraintStart_toStartOf="@+id/imageView10"
-        app:layout_constraintTop_toTopOf="@+id/imageView10"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_class_but_flash"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_class_but_flash"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_class_but_flash"
+        app:layout_constraintTop_toTopOf="@+id/pop_up_class_but_flash"
         app:srcCompat="@drawable/green_border" />
+
+
+    <ImageView
+        android:id="@+id/imageView23"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_class_but_valid"
+        app:layout_constraintEnd_toStartOf="@+id/pop_up_class_but_valid"
+        app:layout_constraintStart_toEndOf="@+id/pop_up_class_but_annul"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_class_but_annul"
+        app:srcCompat="@drawable/button_param" />
 
 </android.support.constraint.ConstraintLayout>

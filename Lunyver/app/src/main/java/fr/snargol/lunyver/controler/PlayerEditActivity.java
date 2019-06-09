@@ -1,10 +1,12 @@
 package fr.snargol.lunyver.controler;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,7 +17,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import fr.snargol.lunyver.R;
+import fr.snargol.lunyver.model.Enums.Class;
 import fr.snargol.lunyver.model.Player;
+import fr.snargol.lunyver.model.PopUpChooseClass;
 
 public class PlayerEditActivity extends AppCompatActivity {
 
@@ -36,7 +40,7 @@ public class PlayerEditActivity extends AppCompatActivity {
         setPosition(position);
         setDatasOnView(getPlayer_list().get(getPosition()));
 
-        setOnClick();
+        setOnClick(this);
 
     }
 
@@ -55,7 +59,7 @@ public class PlayerEditActivity extends AppCompatActivity {
         finish();
     }
 
-    public void setOnClick() {
+    public void setOnClick(final Activity activity) {
         final TextView playerLevel = findViewById(R.id.player_edit_level);
         Button but_up_level = findViewById(R.id.player_edit_but_up_level);
         Button but_down_level = findViewById(R.id.player_edit_but_down_level);
@@ -73,7 +77,6 @@ public class PlayerEditActivity extends AppCompatActivity {
                 playerLevel.setText(String.valueOf(getPlayer_list().get(getPosition()).get_level()));
             }
         });
-
 
         final TextView playerAttack = findViewById(R.id.player_edit_attack);
         Button but_up_attack = findViewById(R.id.player_edit_but_up_attack);
@@ -111,7 +114,6 @@ public class PlayerEditActivity extends AppCompatActivity {
             }
         });
 
-
         final TextView playerLife = findViewById(R.id.player_edit_life);
         Button but_up_life = findViewById(R.id.player_edit_but_up_life);
         Button but_down_life = findViewById(R.id.player_edit_but_down_life);
@@ -129,6 +131,43 @@ public class PlayerEditActivity extends AppCompatActivity {
                 playerLife.setText(String.valueOf(getPlayer_list().get(getPosition()).get_life()));
             }
         });
+
+
+        ImageButton chooseClass =(ImageButton) findViewById(R.id.player_edit_class);
+        chooseClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final PopUpChooseClass popUpClass = new PopUpChooseClass(activity);
+                setOnClickPopUp(popUpClass);
+                popUpClass.build();
+            }
+        });
+    }
+
+    public void setOnClickPopUp(final PopUpChooseClass popUpClass) {
+        popUpClass.getButtonValid().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (popUpClass.getCurrentClass() != null){
+                    getPlayer_list().get(getPosition()).set_class(popUpClass.getCurrentClass() );
+                    ImageButton buttonClass = (ImageButton) findViewById(R.id.player_edit_class);
+                    String ressourceName2 = "class_" + popUpClass.getCurrentClass();
+                    int resId2 = getApplicationContext().getResources().getIdentifier(ressourceName2.toLowerCase(), "drawable", getApplicationContext().getPackageName());
+                    buttonClass.setImageResource(resId2);
+                    popUpClass.dismiss();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Veuillez sélectionner une classe avant de valider", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        popUpClass.getButtonAnnul().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popUpClass.dismiss();
+            }
+        });
+
     }
 
     public void setDatasOnView(Player player){

@@ -10,4 +10,5 @@
     <string name="game4">A venir</string>
     <string name="titlePlayers">Personnages</string>
     <string name="chose_race">Veuillez choisir une nouvelle race</string>
+    <string name="chose_class">Veuillez choisir une nouvelle classe</string>
 </resources>

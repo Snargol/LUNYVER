@@ -116,18 +116,22 @@ public class Player implements Serializable {
     }
 
     public void add_level(int valueToAdd){
-        set_level(get_level()+valueToAdd);
+        if (get_level()+valueToAdd >= 0)
+            set_level(get_level()+valueToAdd);
     }
 
     public void add_attack(int valueToAdd){
-        set_attack(get_attack()+valueToAdd);
+        if (get_attack()+valueToAdd >= 0)
+            set_attack(get_attack()+valueToAdd);
     }
 
     public void add_defense(int valueToAdd){
-        set_defense(get_defense()+valueToAdd);
+        if (get_defense()+valueToAdd >= 0)
+            set_defense(get_defense()+valueToAdd);
     }
 
     public void add_life(int valueToAdd){
-        set_life(get_life()+valueToAdd);
+        if (get_life()+valueToAdd >= 0)
+            set_life(get_life()+valueToAdd);
     }
 }
