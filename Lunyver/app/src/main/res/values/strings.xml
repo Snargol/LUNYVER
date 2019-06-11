@@ -11,4 +11,7 @@
     <string name="titlePlayers">Personnages</string>
     <string name="chose_race">Veuillez choisir une nouvelle race</string>
     <string name="chose_class">Veuillez choisir une nouvelle classe</string>
+    <string name="confirm_action">Etes vous sûre de vouloir faire cela ?</string>
+    <string name="enter_text">Veuillez entrer du texte</string>
+    <string name="enter_text_hint">Nom</string>
 </resources>

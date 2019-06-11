@@ -1,13 +1,11 @@
 package fr.snargol.lunyver.controler;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -18,26 +16,27 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
-import java.security.acl.Group;
 import java.util.ArrayList;
-import java.util.List;
 
 import fr.snargol.lunyver.R;
 import fr.snargol.lunyver.controler.Adapters.PlayerAdapter;
 import fr.snargol.lunyver.model.Enums.Class;
 import fr.snargol.lunyver.model.Enums.Race;
 import fr.snargol.lunyver.model.Player;
+import fr.snargol.lunyver.model.PopUpConfirm;
 
 public class PlayersActivity extends AppCompatActivity {
 
     final private String FILE_NAME = "datasLUNYVER";
     ArrayList<Player> player_list = new ArrayList<>();
+    Activity activity;
+    ListView player_list_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_players);
+        setActivity(this);
 
 //        player_list.add(new Player("Snargol", 14, 7, Class.THIEF, Race.WEREWOLF));
 //        player_list.add(new Player("Euxiniar", 12, 6, Class.ARCHER, Race.FAIRY));
@@ -45,7 +44,12 @@ public class PlayersActivity extends AppCompatActivity {
 //        player_list.add(new Player("Zozo", 15, 7 , Class.FLASH, Race.CENTAUR));
 //        player_list.add(new Player("Phelie", 16, 5 , Class.TRAINER, Race.GNOME));
 //        player_list.add(new Player("Jere", 13, 8 , Class.PROTECTOR, Race.ELF));
-//        player_list.add(new Player("Snargol", 14, 7, Class.THIEF, Race.WEREWOLF));
+
+//        try {
+//            saveDatas(getPlayer_list(), FILE_NAME);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
 
         try {
             player_list = loadDatas(FILE_NAME);
@@ -53,37 +57,63 @@ public class PlayersActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ListView player_list_view = findViewById(R.id.list_view_player_list);
+        setPlayer_list_view((ListView) findViewById(R.id.list_view_player_list));
 
-        String[] names = new String[] {player_list.get(0).get_name(), player_list.get(1).get_name(), player_list.get(2).get_name(), player_list.get(3).get_name(), player_list.get(4).get_name(), player_list.get(5).get_name()};
-
-        PlayerAdapter playerAdapter = new PlayerAdapter(this, player_list, names);
+        PlayerAdapter playerAdapter = new PlayerAdapter(this, player_list, getNames());
         player_list_view.setAdapter(playerAdapter);
 
         player_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent playersEditActivity = new Intent(getApplicationContext(), PlayerEditActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("player_list", player_list);
-                playersEditActivity.putExtras(bundle);
-                playersEditActivity.putExtra("position", position);
-                startActivity(playersEditActivity);
-                finish();
+                goToEditPlayer(position);
             }
         });
 
-//        Button buttonAddPlayer = (Button) findViewById(R.id.button_add_player);
-//        buttonAddPlayer.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                try {
-//                    saveDatas(player_list, FILE_NAME);
-//                } catch (FileNotFoundException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
+        player_list_view.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                final PopUpConfirm popUp = new PopUpConfirm(getActivity());
+                popUp.setTitle("Voulez vous supprimer le personnage " + getPlayer_list().get(position).get_name() + " ?");
+                popUp.getButtonAnnul().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popUp.dismiss();
+                    }
+                });
+                popUp.getButtonValid().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getApplicationContext(), getPlayer_list().get(position).get_name() + " supprimé", Toast.LENGTH_SHORT).show();
+                        getPlayer_list().remove(position);
+                        try {
+                            saveDatas(getPlayer_list(), FILE_NAME);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        PlayerAdapter playerAdapter = new PlayerAdapter(getActivity(), getPlayer_list(), getNames());
+                        getPlayer_list_view().setAdapter(playerAdapter);
+                        popUp.dismiss();
+                    }
+                });
+                popUp.build();
+
+                return false;
+            }
+        });
+
+        Button buttonAddPlayer = (Button) findViewById(R.id.button_add_player);
+        buttonAddPlayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPlayer_list().add(new Player("Nom", 1, 0, Class.NO_CLASS, Race.NO_RACE));
+                goToEditPlayer(getPlayer_list().size()-1);
+                try {
+                    saveDatas(player_list, FILE_NAME);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         Button buttondes = (Button) findViewById(R.id.button_des);
         buttondes.setOnClickListener(new View.OnClickListener() {
@@ -101,12 +131,34 @@ public class PlayersActivity extends AppCompatActivity {
 
     }
 
+    public void goToEditPlayer(int position) {
+        Intent playersEditActivity = new Intent(getApplicationContext(), PlayerEditActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("player_list", player_list);
+        playersEditActivity.putExtras(bundle);
+        playersEditActivity.putExtra("position", position);
+        startActivity(playersEditActivity);
+        finish();
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         Intent activity = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(activity);
         finish();
+    }
+
+    public String[] getNames() {
+        String[] names = new String[getPlayer_list().size()];
+        int i = 0;
+        for (Player player: getPlayer_list()
+        ) {
+            if (i <= 5)
+                names[i] = player.get_name();
+            i++;
+        }
+        return names;
     }
 
 
@@ -197,11 +249,48 @@ public class PlayersActivity extends AppCompatActivity {
         return playerList;
     }
 
+    public void saveDatas(ArrayList<Player> player_list, String file_name) throws FileNotFoundException {
+        FileOutputStream file = null;
+
+
+        file = openFileOutput(file_name, MODE_PRIVATE);
+
+        for (Player player: player_list) {
+            try {
+                String string = player.get_name() + "|" + player.get_race() + "|" +
+                        player.get_class() + "|" + player.get_attack() + "|" + player.get_defense() + "|" +
+                        player.get_life() + "|" + player.get_level() + "|" + player.get_contributed_money() + "|" +
+                        player.get_isAlive()+"|/";
+                file.write(string.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+//        Toast.makeText(getApplicationContext(), "Saved to "+ getFilesDir() + "/" + file_name, Toast.LENGTH_LONG).show();
+    }
+
     public ArrayList<Player> getPlayer_list() {
         return player_list;
     }
 
     public void setPlayer_list(ArrayList<Player> player_list) {
         this.player_list = player_list;
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
+    }
+
+    public ListView getPlayer_list_view() {
+        return player_list_view;
+    }
+
+    public void setPlayer_list_view(ListView player_list_view) {
+        this.player_list_view = player_list_view;
     }
 }

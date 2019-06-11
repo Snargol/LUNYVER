@@ -6,5 +6,6 @@ public enum Class {
     PROTECTOR,
     FLASH,
     TRAINER,
-    BERSERK
+    BERSERK,
+    NO_CLASS
 }

@@ -6,5 +6,6 @@ public enum Race {
     TROLL,
     GNOME,
     CENTAUR,
-    ELF
+    ELF,
+    NO_RACE
 }

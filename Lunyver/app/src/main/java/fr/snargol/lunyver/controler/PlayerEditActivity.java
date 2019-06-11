@@ -2,6 +2,7 @@ package fr.snargol.lunyver.controler;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.RemoteControlClient;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +21,8 @@ import fr.snargol.lunyver.R;
 import fr.snargol.lunyver.model.Enums.Class;
 import fr.snargol.lunyver.model.Player;
 import fr.snargol.lunyver.model.PopUpChooseClass;
+import fr.snargol.lunyver.model.PopUpChooseRace;
+import fr.snargol.lunyver.model.PopUpChooseText;
 
 public class PlayerEditActivity extends AppCompatActivity {
 
@@ -133,7 +136,7 @@ public class PlayerEditActivity extends AppCompatActivity {
         });
 
 
-        ImageButton chooseClass =(ImageButton) findViewById(R.id.player_edit_class);
+        ImageButton chooseClass = findViewById(R.id.player_edit_class);
         chooseClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,6 +145,85 @@ public class PlayerEditActivity extends AppCompatActivity {
                 popUpClass.build();
             }
         });
+
+        ImageButton chooseRace = findViewById(R.id.player_edit_race);
+        chooseRace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final PopUpChooseRace popUpRace = new PopUpChooseRace(activity);
+                setOnClickPopUp(popUpRace);
+                popUpRace.build();
+            }
+        });
+
+        Button edit_name = (Button) findViewById(R.id.player_edit_name);
+        edit_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final PopUpChooseText popUp = new PopUpChooseText(activity);
+                setOnClickPopUp(popUp);
+                popUp.getInputText().requestFocus();
+                if (!String.valueOf(popUp.getInputText().getText()).toLowerCase().equals("nom"))
+                    popUp.getInputText().setText(getPlayer_list().get(getPosition()).get_name());
+                popUp.setTitle("Veuillez entrer un nom pour le personnage");
+                popUp.build();
+            }
+        });
+    }
+
+    public void setOnClickPopUp(final PopUpChooseText popUp) {
+        popUp.getButtonValid().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (popUp.getInputText().getText().length() != 0){
+                    getPlayer_list().get(getPosition()).set_name(String.valueOf(popUp.getInputText().getText()));
+                    try {
+                        saveDatas(getPlayer_list(), FILE_NAME);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    Button button_name = findViewById(R.id.player_edit_name);
+                    button_name.setText(getPlayer_list().get(getPosition()).get_name());
+                    popUp.dismiss();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Veuillez sélectionner un nom avant de valider", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        popUp.getButtonAnnul().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popUp.dismiss();
+            }
+        });
+
+    }
+
+    public void setOnClickPopUp(final PopUpChooseRace popUpRace) {
+        popUpRace.getButtonValid().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (popUpRace.getCurrentRace() != null){
+                    getPlayer_list().get(getPosition()).set_race(popUpRace.getCurrentRace() );
+                    ImageButton buttonRace = findViewById(R.id.player_edit_race);
+                    String ressourceName2 = "race_" + popUpRace.getCurrentRace();
+                    int resId2 = getApplicationContext().getResources().getIdentifier(ressourceName2.toLowerCase(), "drawable", getApplicationContext().getPackageName());
+                    buttonRace.setImageResource(resId2);
+                    popUpRace.dismiss();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Veuillez sélectionner une race avant de valider", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        popUpRace.getButtonAnnul().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popUpRace.dismiss();
+            }
+        });
+
     }
 
     public void setOnClickPopUp(final PopUpChooseClass popUpClass) {
@@ -150,7 +232,7 @@ public class PlayerEditActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (popUpClass.getCurrentClass() != null){
                     getPlayer_list().get(getPosition()).set_class(popUpClass.getCurrentClass() );
-                    ImageButton buttonClass = (ImageButton) findViewById(R.id.player_edit_class);
+                    ImageButton buttonClass = findViewById(R.id.player_edit_class);
                     String ressourceName2 = "class_" + popUpClass.getCurrentClass();
                     int resId2 = getApplicationContext().getResources().getIdentifier(ressourceName2.toLowerCase(), "drawable", getApplicationContext().getPackageName());
                     buttonClass.setImageResource(resId2);
