@@ -6,6 +6,7 @@
     <color name="colorBlueOcean">#136666</color>
     <color name="colorBlack">#000000</color>
     <color name="colorGreen">#4CAF50</color>
+    <color name="colorGreenPale">#6DB471</color>
     <color name="colorRed">#E91E1E</color>
     <color name="colorGray">#585858</color>
 </resources>

@@ -115,6 +115,16 @@ public class PlayersActivity extends AppCompatActivity {
             }
         });
 
+        Button buttonFight = (Button) findViewById(R.id.button_fight);
+        buttonFight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activity = new Intent(getApplicationContext(), PlayersFightActivity.class);
+                startActivity(activity);
+                finish();
+            }
+        });
+
         Button buttondes = (Button) findViewById(R.id.button_des);
         buttondes.setOnClickListener(new View.OnClickListener() {
             @Override

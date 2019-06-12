@@ -14,4 +14,8 @@
     <string name="confirm_action">Etes vous sûre de vouloir faire cela ?</string>
     <string name="enter_text">Veuillez entrer du texte</string>
     <string name="enter_text_hint">Nom</string>
+    <string name="fight">Combat</string>
+    <string name="attaquant">Attaquants</string>
+    <string name="defenseur">Défenseurs</string>
+    <string name="start_fight">FIGHT</string>
 </resources>
