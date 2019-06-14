@@ -19,6 +19,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import fr.snargol.lunyver.R;
+import fr.snargol.lunyver.controler.Adapters.Files;
 import fr.snargol.lunyver.controler.Adapters.PlayerAdapter;
 import fr.snargol.lunyver.model.Enums.Class;
 import fr.snargol.lunyver.model.Enums.Race;
@@ -130,7 +131,7 @@ public class PlayersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    player_list = loadDatas(FILE_NAME);
+                    loadDatas(FILE_NAME);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -171,28 +172,29 @@ public class PlayersActivity extends AppCompatActivity {
         return names;
     }
 
+    public ArrayList<Player> getPlayer_list() {
+        return player_list;
+    }
 
-//    public void saveDatas(ArrayList<Player> player_list, String file_name) throws FileNotFoundException {
-//        FileOutputStream file = null;
-//
-//
-//        file = openFileOutput(file_name, MODE_PRIVATE);
-//
-//        for (Player player: player_list) {
-//            try {
-//                String string = player.get_name() + "|" + player.get_race() + "|" +
-//                        player.get_class() + "|" + player.get_attack() + "|" + player.get_defense() + "|" +
-//                        player.get_life() + "|" + player.get_level() + "|" + player.get_contributed_money() + "|" +
-//                        player.get_isAlive()+"|/";
-//                file.write(string.getBytes());
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//
-//        Toast.makeText(getApplicationContext(), "Saved to "+ getFilesDir() + "/" + file_name, Toast.LENGTH_LONG).show();
-//    }
+    public void setPlayer_list(ArrayList<Player> player_list) {
+        this.player_list = player_list;
+    }
 
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
+    }
+
+    public ListView getPlayer_list_view() {
+        return player_list_view;
+    }
+
+    public void setPlayer_list_view(ListView player_list_view) {
+        this.player_list_view = player_list_view;
+    }
 
     public ArrayList<Player> loadDatas(String file_name) throws IOException {
         FileInputStream file = null;
@@ -211,7 +213,7 @@ public class PlayersActivity extends AppCompatActivity {
             try {
                 while ((line = br.readLine()) != null) {
                     sb.append(line);
-            }
+                }
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -278,29 +280,5 @@ public class PlayersActivity extends AppCompatActivity {
         }
 
 //        Toast.makeText(getApplicationContext(), "Saved to "+ getFilesDir() + "/" + file_name, Toast.LENGTH_LONG).show();
-    }
-
-    public ArrayList<Player> getPlayer_list() {
-        return player_list;
-    }
-
-    public void setPlayer_list(ArrayList<Player> player_list) {
-        this.player_list = player_list;
-    }
-
-    public Activity getActivity() {
-        return activity;
-    }
-
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
-
-    public ListView getPlayer_list_view() {
-        return player_list_view;
-    }
-
-    public void setPlayer_list_view(ListView player_list_view) {
-        this.player_list_view = player_list_view;
     }
 }

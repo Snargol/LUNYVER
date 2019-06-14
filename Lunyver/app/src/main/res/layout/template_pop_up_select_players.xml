@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/title_select_players"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/middle_titre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/pop_up_image_centaur"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_image_elf"
+        app:layout_constraintEnd_toStartOf="@+id/pop_up_image_elf"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pop_up_image_elf"
+        app:srcCompat="@drawable/race_centaur" />
+
+    <ImageView
+        android:id="@+id/pop_up_image_elf"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_pseudo_elf"
+        app:srcCompat="@drawable/race_elf" />
+
+    <ImageView
+        android:id="@+id/pop_up_image_fairy"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_image_elf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pop_up_image_elf"
+        app:layout_constraintTop_toTopOf="@+id/pop_up_image_elf"
+        app:srcCompat="@drawable/race_fairy" />
+
+    <ImageView
+        android:id="@+id/pop_up_image_gnome"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_image_elf"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_image_elf"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_pseudo_gnome"
+        app:srcCompat="@drawable/race_gnome" />
+
+    <ImageView
+        android:id="@+id/pop_up_image_troll"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_image_centaur"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_image_centaur"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_pseudo_troll"
+        app:srcCompat="@drawable/race_troll" />
+
+    <ImageView
+        android:id="@+id/pop_up_image_werewolf"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_image_fairy"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_image_fairy"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_pseudo_werewolf"
+        app:srcCompat="@drawable/race_werewolf" />
+
+    <TextView
+        android:id="@+id/pop_up_pseudo_centaur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_pseudo_elf"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_image_centaur"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_image_centaur"
+        app:layout_constraintTop_toTopOf="@+id/pop_up_pseudo_elf" />
+
+    <TextView
+        android:id="@+id/pop_up_pseudo_elf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_image_elf"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_image_elf"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/pop_up_pseudo_fairy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_pseudo_elf"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_image_fairy"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_image_fairy"
+        app:layout_constraintTop_toTopOf="@+id/pop_up_pseudo_elf" />
+
+    <TextView
+        android:id="@+id/pop_up_pseudo_troll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_image_troll"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_image_troll"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_image_centaur" />
+
+    <TextView
+        android:id="@+id/pop_up_pseudo_gnome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_image_gnome"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_image_gnome"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_image_elf" />
+
+    <TextView
+        android:id="@+id/pop_up_pseudo_werewolf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_image_werewolf"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_image_werewolf"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_image_fairy" />
+
+    <ImageView
+        android:id="@+id/pop_up_image_boss"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_image_werewolf"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_image_werewolf"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_pseudo_boss"
+        app:srcCompat="@drawable/BOSS" />
+
+    <ImageView
+        android:id="@+id/pop_up_image_mob"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_image_troll"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_image_troll"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_pseudo_mob"
+        app:srcCompat="@drawable/MOB" />
+
+    <TextView
+        android:id="@+id/pop_up_pseudo_mob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_image_mob"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_image_mob"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_image_troll" />
+
+    <TextView
+        android:id="@+id/pop_up_pseudo_boss"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_image_boss"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_image_boss"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_image_werewolf" />
+
+    <Button
+        android:id="@+id/pop_up_but_annul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/colorRed"
+        android:text="@string/annul"
+        app:layout_constraintEnd_toStartOf="@+id/pop_up_image_gnome"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_image_gnome"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_image_mob" />
+
+    <Button
+        android:id="@+id/pop_up_but_valid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorGreen"
+        android:text="@string/valid"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_image_gnome"
+        app:layout_constraintStart_toEndOf="@+id/pop_up_image_gnome"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_image_boss" />
+
+</android.support.constraint.ConstraintLayout>

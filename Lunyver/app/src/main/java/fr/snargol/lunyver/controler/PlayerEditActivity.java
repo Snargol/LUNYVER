@@ -2,9 +2,8 @@ package fr.snargol.lunyver.controler;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.media.RemoteControlClient;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -18,7 +17,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import fr.snargol.lunyver.R;
-import fr.snargol.lunyver.model.Enums.Class;
 import fr.snargol.lunyver.model.Player;
 import fr.snargol.lunyver.model.PopUpChooseClass;
 import fr.snargol.lunyver.model.PopUpChooseRace;
@@ -46,8 +44,6 @@ public class PlayerEditActivity extends AppCompatActivity {
         setOnClick(this);
 
     }
-
-
 
     @Override
     public void onBackPressed() {
