@@ -1,8 +1,10 @@
 package fr.snargol.lunyver.controler.Adapters;
 
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -15,6 +17,21 @@ import fr.snargol.lunyver.model.Enums.Race;
 import fr.snargol.lunyver.model.Player;
 
 public class Files extends AppCompatActivity {
+
+    public Files() {
+
+    }
+
+    public void createFileIfNotExist(String file_name) {
+        File file = new File(file_name + ".txt");
+        try {
+            file.createNewFile(); // if file already exists will do nothing
+            String test = ""+getFilesDir();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public ArrayList<Player> loadDatas(String file_name) throws IOException {
         FileInputStream file = null;
         ArrayList<Player> playerList = new ArrayList<Player>();
