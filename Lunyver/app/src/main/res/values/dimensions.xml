@@ -7,5 +7,4 @@
     <dimen name="titre">25sp</dimen>
     <dimen name="little_titre">18sp</dimen>
     <dimen name="big_text">15sp</dimen>
-
 </resources>

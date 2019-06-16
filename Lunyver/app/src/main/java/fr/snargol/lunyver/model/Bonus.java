@@ -1,17 +1,42 @@
 package fr.snargol.lunyver.model;
 
-public class Bonus {
-    int attack_bonus;
-    int defense_bonus;
-    int life_modif;
-    int position;
+import fr.snargol.lunyver.model.Enums.Race;
 
-    public Bonus(int position) {
-        this.position = position;
+public class Bonus {
+    private int attack_bonus;
+    private int defense_bonus;
+    private int life_modif;
+    private Race race;
+
+    public Bonus(int attack, int defense, int life_change, Race race) {
+        setRace(race);
+        setAttack_bonus(attack);
+        setDefense_bonus(defense);
+        setLife_modif(life_change);
     }
 
     public int getAttack_bonus() {
         return attack_bonus;
+    }
+
+    public String getAttack_bonus_string() {
+        if (getAttack_bonus() > 0)
+            return "+"+getAttack_bonus();
+        else if (getAttack_bonus() < 0){
+            return "-"+getAttack_bonus();
+        }
+        else
+            return String.valueOf(getAttack_bonus());
+    }
+
+    public String getDefense_bonus_string() {
+        if (getDefense_bonus() > 0)
+            return "+"+getDefense_bonus();
+        else if (getDefense_bonus() < 0){
+            return "-"+getDefense_bonus();
+        }
+        else
+            return String.valueOf(getDefense_bonus());
     }
 
     public void setAttack_bonus(int attack_bonus) {
@@ -46,11 +71,11 @@ public class Bonus {
         setLife_modif(getLife_modif()+life_modif);
     }
 
-    public int getPosition() {
-        return position;
+    public Race getRace() {
+        return race;
     }
 
-    public void setPosition(int position) {
-        this.position = position;
+    public void setRace(Race race) {
+        this.race = race;
     }
 }

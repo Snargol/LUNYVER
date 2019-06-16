@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -17,17 +19,19 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import fr.snargol.lunyver.R;
-import fr.snargol.lunyver.controler.Adapters.PlayerAdapter;
 import fr.snargol.lunyver.controler.Adapters.PlayerFightAdapter;
+import fr.snargol.lunyver.model.Bonus;
 import fr.snargol.lunyver.model.Enums.Class;
 import fr.snargol.lunyver.model.Enums.Race;
 import fr.snargol.lunyver.model.Player;
+import fr.snargol.lunyver.model.PopUpEnterBonus;
 import fr.snargol.lunyver.model.PopUpSelectPlayer;
 
 public class PlayersFightActivity extends AppCompatActivity {
     ArrayList<Player> player_list = new ArrayList<>();
     ArrayList<Player> player_list_off = new ArrayList<>();
     ArrayList<Player> player_list_def = new ArrayList<>();
+    ArrayList<Bonus> bonus_list = new ArrayList<>();
     ListView player_list_view_off;
     ListView player_list_view_def;
     final String FILE_NAME = "datasLUNYVER";
@@ -51,9 +55,9 @@ public class PlayersFightActivity extends AppCompatActivity {
         setPlayer_list_view_off((ListView) findViewById(R.id.players_fight_list_off));
         setPlayer_list_view_def((ListView) findViewById(R.id.players_fight_list_def));
 
-        PlayerFightAdapter playerAdapterOff = new PlayerFightAdapter(this, getPlayer_list_off(), getNames(getPlayer_list_off()));
+        PlayerFightAdapter playerAdapterOff = new PlayerFightAdapter(this, getPlayer_list_off(), getNames(getPlayer_list_off()), getBonus_list());
         getPlayer_list_view_off().setAdapter(playerAdapterOff);
-        PlayerFightAdapter playerAdapterDef = new PlayerFightAdapter(this, getPlayer_list_def(), getNames(getPlayer_list_def()));
+        PlayerFightAdapter playerAdapterDef = new PlayerFightAdapter(this, getPlayer_list_def(), getNames(getPlayer_list_def()), getBonus_list());
         getPlayer_list_view_def().setAdapter(playerAdapterDef);
 
         Button addPlayerOff = findViewById(R.id.players_fight_add_off);
@@ -77,7 +81,7 @@ public class PlayersFightActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         setPlayer_list_off(popUp.getPlayer_list_off());
-                        PlayerFightAdapter playerAdapterOff = new PlayerFightAdapter(getActivity(), getPlayer_list_off(), getNames(getPlayer_list_off()));
+                        PlayerFightAdapter playerAdapterOff = new PlayerFightAdapter(getActivity(), getPlayer_list_off(), getNames(getPlayer_list_off()), getBonus_list());
                         getPlayer_list_view_off().setAdapter(playerAdapterOff);
                         popUp.dismiss();
                     }
@@ -107,7 +111,7 @@ public class PlayersFightActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         setPlayer_list_def(popUp.getPlayer_list_def());
-                        PlayerFightAdapter playerAdapterDef = new PlayerFightAdapter(getActivity(), getPlayer_list_def(), getNames(getPlayer_list_def()));
+                        PlayerFightAdapter playerAdapterDef = new PlayerFightAdapter(getActivity(), getPlayer_list_def(), getNames(getPlayer_list_def()), getBonus_list());
                         getPlayer_list_view_def().setAdapter(playerAdapterDef);
                         popUp.dismiss();
                     }
@@ -124,6 +128,71 @@ public class PlayersFightActivity extends AppCompatActivity {
             }
         });
 
+        getPlayer_list_view_off().setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                final PopUpEnterBonus popUp = new PopUpEnterBonus(getActivity(), getPlayer_list_off().get(position));
+                if (getBonusByRace(getPlayer_list_off().get(position).get_race()) != null){
+                    popUp.addBonus(getBonusByRace(getPlayer_list().get(position).get_race()));
+                }
+
+                popUp.getButtonAnnul().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popUp.dismiss();
+                    }
+                });
+                popUp.getButtonValid().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (popUp.getInputAttack().getText() != null &&
+                                popUp.getInputDefense().getText() != null &&
+                                popUp.getInputLife().getText() != null) {
+                            popUp.assertTextsNonNull();
+                            int attack = Integer.parseInt(String.valueOf(popUp.getInputAttack().getText()));
+                            int defense = Integer.parseInt(String.valueOf(popUp.getInputDefense().getText()));
+                            int life = Integer.parseInt(String.valueOf(popUp.getInputLife().getText()));
+                            if (getBonusByRace(getPlayer_list_off().get(position).get_race()) != null){
+                                getBonus_list().set(getPositionOfBonus(getPlayer_list_off().get(position).get_race()),
+                                        new Bonus(attack,defense,life,getPlayer_list_off().get(position).get_race()));
+                            }
+                            else {
+                                getBonus_list().add(new Bonus(attack,defense,life,getPlayer_list_off().get(position).get_race()));
+                            }
+                            PlayerFightAdapter playerAdapterOff = new PlayerFightAdapter(getActivity(), getPlayer_list_off(), getNames(getPlayer_list_off()), getBonus_list());
+                            getPlayer_list_view_off().setAdapter(playerAdapterOff);
+
+                            popUp.dismiss();
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "Veuillez rentrer un bonus dans chaque champ", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                popUp.build();
+            }
+        });
+
+    }
+
+    private Bonus getBonusByRace(Race race) {
+        int i = 0;
+        for (Bonus bonus:getBonus_list()) {
+            if (bonus.getRace() == race)
+                return getBonus_list().get(i);
+            i++;
+        }
+        return null;
+    }
+
+    private int getPositionOfBonus(Race race) {
+        int i = 0;
+        for (Bonus bonus:getBonus_list()) {
+            if (bonus.getRace() == race)
+                return i;
+            i++;
+        }
+        return -1;
     }
 
     @Override
@@ -291,5 +360,13 @@ public class PlayersFightActivity extends AppCompatActivity {
 
     public void setActivity(Activity activity) {
         this.activity = activity;
+    }
+
+    public ArrayList<Bonus> getBonus_list() {
+        return bonus_list;
+    }
+
+    public void setBonus_list(ArrayList<Bonus> bonus_list) {
+        this.bonus_list = bonus_list;
     }
 }

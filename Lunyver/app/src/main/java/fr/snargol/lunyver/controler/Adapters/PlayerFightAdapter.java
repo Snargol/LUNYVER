@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,10 +16,8 @@ import java.util.List;
 
 import fr.snargol.lunyver.R;
 import fr.snargol.lunyver.model.Bonus;
+import fr.snargol.lunyver.model.Enums.Race;
 import fr.snargol.lunyver.model.Player;
-
-import static fr.snargol.lunyver.R.id.text_player_name_list;
-import static fr.snargol.lunyver.R.layout.adapter_players_fight;
 
 public class PlayerFightAdapter extends ArrayAdapter<String> {
 
@@ -28,15 +25,26 @@ public class PlayerFightAdapter extends ArrayAdapter<String> {
     private List<Player> players_list;
     private ArrayList<Bonus> bonus_list;
 
-    public PlayerFightAdapter(Context context, List<Player> players_list, String[] names) {
+    public PlayerFightAdapter(Context context, List<Player> players_list, String[] names, ArrayList<Bonus> bonus_list) {
         super(context, R.layout.adapter_players_fight, R.id.adapter_player_fight_text_pseudo, names);
         setContext(context);
         setContext(context);
         setPlayers_list(players_list);
+        setBonus_list(bonus_list);
+    }
+
+    private Bonus getBonusByRace(Race race) {
+        int i = 0;
+        for (Bonus bonus:getBonus_list()) {
+            if (bonus.getRace() == race)
+                return getBonus_list().get(i);
+            i++;
+        }
+        return null;
     }
 
     public Player getPlayer(int position) {
-        return players_list.get(position);
+        return getPlayers_list().get(position);
     }
 
     @Override
@@ -48,6 +56,7 @@ public class PlayerFightAdapter extends ArrayAdapter<String> {
 
         Player currentPlayer = getPlayer(position);
         setDatasOnView(currentPlayer, row);
+        setBonus(row, getBonusByRace(currentPlayer.get_race()));
 
         return row;
     }
@@ -70,6 +79,22 @@ public class PlayerFightAdapter extends ArrayAdapter<String> {
         String ressourceName = "race_" + player.get_race();
         int resId = context.getResources().getIdentifier(ressourceName.toLowerCase(), "drawable", context.getPackageName());
         playerRace.setImageResource(resId);
+    }
+
+    public void setBonus(View view, Bonus bonus) {
+        TextView textAttack = view.findViewById(R.id.adapter_player_fight_bonus_attack);
+        TextView textDefense = view.findViewById(R.id.adapter_player_fight_bonus_defense);
+
+        if (bonus != null) {
+            if (bonus.getAttack_bonus() != 0) {
+                textAttack.setText(bonus.getAttack_bonus_string());
+                textAttack.setVisibility(View.VISIBLE);
+            }
+            if (bonus.getDefense_bonus() != 0) {
+                textDefense.setText(bonus.getDefense_bonus_string());
+                textDefense.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     @Override
@@ -96,4 +121,6 @@ public class PlayerFightAdapter extends ArrayAdapter<String> {
     public void setBonus_list(ArrayList<Bonus> bonus_list) {
         this.bonus_list = bonus_list;
     }
+
+
 }

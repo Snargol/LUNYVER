@@ -3,8 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_gravity="center"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/pop_up_add_bonus_title"
@@ -15,17 +16,18 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:textSize="@dimen/middle_titre"
-        android:textColor="@color/colorBlack"
         android:text="Ajouter un bonus"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/titre"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/pop_up_add_bonus_image_class"
         app:layout_constraintStart_toEndOf="@+id/pop_up_add_bonus_image_race"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/pop_up_add_bonus_image_race"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -37,9 +39,9 @@
         android:id="@+id/pop_up_add_bonus_image_class"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/class_thief" />
@@ -52,10 +54,11 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:textSize="@dimen/little_titre"
         android:text="Pseudo"
-        app:layout_constraintEnd_toStartOf="@+id/pop_up_add_bonus_image_class"
-        app:layout_constraintStart_toEndOf="@+id/pop_up_add_bonus_image_race"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/little_titre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pop_up_add_bonus_title" />
 
     <ImageView
@@ -76,10 +79,13 @@
         android:id="@+id/imageView14"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="@+id/pop_up_add_bonus_pseudo"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/pop_up_add_bonus_pseudo"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pop_up_add_bonus_pseudo"
         app:srcCompat="@drawable/shield" />
 
@@ -100,10 +106,13 @@
     <EditText
         android:id="@+id/pop_up_add_bonus_edit_attack"
         android:layout_width="65dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:textColor="@color/colorBlack"
         android:inputType="number"
+        android:gravity="center"
+        android:textSize="@dimen/big_title"
         app:layout_constraintEnd_toEndOf="@+id/imageView12"
         app:layout_constraintStart_toStartOf="@+id/imageView12"
         app:layout_constraintTop_toBottomOf="@+id/imageView12" />
@@ -111,10 +120,13 @@
     <EditText
         android:id="@+id/pop_up_add_bonus_edit_def"
         android:layout_width="65dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="number"
+        android:textColor="@color/colorBlack"
+        android:gravity="center"
+        android:textSize="@dimen/big_title"
         app:layout_constraintEnd_toEndOf="@+id/imageView14"
         app:layout_constraintStart_toStartOf="@+id/imageView14"
         app:layout_constraintTop_toBottomOf="@+id/imageView14" />
@@ -122,10 +134,13 @@
     <EditText
         android:id="@+id/pop_up_add_bonus_edit_heart"
         android:layout_width="65dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="number"
+        android:textColor="@color/colorBlack"
+        android:gravity="center"
+        android:textSize="@dimen/big_title"
         app:layout_constraintEnd_toEndOf="@+id/imageView15"
         app:layout_constraintStart_toStartOf="@+id/imageView15"
         app:layout_constraintTop_toBottomOf="@+id/imageView15" />
@@ -134,9 +149,11 @@
         android:id="@+id/pop_up_add_bonus_but_annul"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
         android:background="@color/colorRed"
         android:text="@string/annul"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/pop_up_add_bonus_edit_def"
         app:layout_constraintTop_toBottomOf="@+id/pop_up_add_bonus_edit_def" />
 
@@ -144,9 +161,11 @@
         android:id="@+id/pop_up_add_bonus_but_valid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="12dp"
         android:background="@color/colorGreen"
         android:text="@string/valid"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/pop_up_add_bonus_edit_def"
         app:layout_constraintTop_toBottomOf="@+id/pop_up_add_bonus_edit_def" />
 
