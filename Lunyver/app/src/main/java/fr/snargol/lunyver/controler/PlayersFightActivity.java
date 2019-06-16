@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import fr.snargol.lunyver.R;
 import fr.snargol.lunyver.controler.Adapters.PlayerAdapter;
+import fr.snargol.lunyver.controler.Adapters.PlayerFightAdapter;
 import fr.snargol.lunyver.model.Enums.Class;
 import fr.snargol.lunyver.model.Enums.Race;
 import fr.snargol.lunyver.model.Player;
@@ -50,9 +51,9 @@ public class PlayersFightActivity extends AppCompatActivity {
         setPlayer_list_view_off((ListView) findViewById(R.id.players_fight_list_off));
         setPlayer_list_view_def((ListView) findViewById(R.id.players_fight_list_def));
 
-        PlayerAdapter playerAdapterOff = new PlayerAdapter(this, getPlayer_list_off(), getNames(getPlayer_list_off()));
+        PlayerFightAdapter playerAdapterOff = new PlayerFightAdapter(this, getPlayer_list_off(), getNames(getPlayer_list_off()));
         getPlayer_list_view_off().setAdapter(playerAdapterOff);
-        PlayerAdapter playerAdapterDef = new PlayerAdapter(this, getPlayer_list_def(), getNames(getPlayer_list_def()));
+        PlayerFightAdapter playerAdapterDef = new PlayerFightAdapter(this, getPlayer_list_def(), getNames(getPlayer_list_def()));
         getPlayer_list_view_def().setAdapter(playerAdapterDef);
 
         Button addPlayerOff = findViewById(R.id.players_fight_add_off);
@@ -76,7 +77,7 @@ public class PlayersFightActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         setPlayer_list_off(popUp.getPlayer_list_off());
-                        PlayerAdapter playerAdapterOff = new PlayerAdapter(getActivity(), getPlayer_list_off(), getNames(getPlayer_list_off()));
+                        PlayerFightAdapter playerAdapterOff = new PlayerFightAdapter(getActivity(), getPlayer_list_off(), getNames(getPlayer_list_off()));
                         getPlayer_list_view_off().setAdapter(playerAdapterOff);
                         popUp.dismiss();
                     }
@@ -106,12 +107,20 @@ public class PlayersFightActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         setPlayer_list_def(popUp.getPlayer_list_def());
-                        PlayerAdapter playerAdapterDef = new PlayerAdapter(getActivity(), getPlayer_list_def(), getNames(getPlayer_list_def()));
+                        PlayerFightAdapter playerAdapterDef = new PlayerFightAdapter(getActivity(), getPlayer_list_def(), getNames(getPlayer_list_def()));
                         getPlayer_list_view_def().setAdapter(playerAdapterDef);
                         popUp.dismiss();
                     }
                 });
                 popUp.build();
+            }
+        });
+
+        Button fight_button = findViewById(R.id.players_fight_button_fight);
+        fight_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 

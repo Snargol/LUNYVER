@@ -29,7 +29,8 @@ public class PlayerFightAdapter extends ArrayAdapter<String> {
     private ArrayList<Bonus> bonus_list;
 
     public PlayerFightAdapter(Context context, List<Player> players_list, String[] names) {
-        super(context, R.layout.adapter_players_fight, R.id.adapter_players_fight_pseudo, names);
+        super(context, R.layout.adapter_players_fight, R.id.adapter_player_fight_text_pseudo, names);
+        setContext(context);
         setContext(context);
         setPlayers_list(players_list);
     }
@@ -53,19 +54,19 @@ public class PlayerFightAdapter extends ArrayAdapter<String> {
 
     @SuppressLint("SetTextI18n")
     public void setDatasOnView(Player player, View view){
-        TextView playerName = view.findViewById(R.id.adapter_players_fight_pseudo);
+        TextView playerName = view.findViewById(R.id.adapter_player_fight_text_pseudo);
         playerName.setText(player.get_name());
 
-        TextView playerAttack = view.findViewById(R.id.adapter_players_fight_attack);
+        TextView playerAttack = view.findViewById(R.id.adapter_player_fight_text_attack);
         playerAttack.setText(player.get_attack()+"");
 
-        TextView playerDefense = view.findViewById(R.id.adapter_players_fight_defense);
+        TextView playerDefense = view.findViewById(R.id.adapter_player_fight_text_defense);
         playerDefense.setText(player.get_defense()+"");
 
-        TextView playerLife = view.findViewById(R.id.adapter_players_fight_life);
+        TextView playerLife = view.findViewById(R.id.adapter_player_fight_text_life);
         playerLife.setText(player.get_life()+"");
 
-        ImageView playerRace= view.findViewById(R.id.adapter_players_fight_image_race);
+        ImageView playerRace= view.findViewById(R.id.adapter_player_fight_image_race);
         String ressourceName = "race_" + player.get_race();
         int resId = context.getResources().getIdentifier(ressourceName.toLowerCase(), "drawable", context.getPackageName());
         playerRace.setImageResource(resId);
