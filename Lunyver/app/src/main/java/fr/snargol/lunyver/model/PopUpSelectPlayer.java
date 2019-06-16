@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -55,15 +56,19 @@ public class PopUpSelectPlayer extends Dialog {
 //    isAttack : True(this is the popup for select the attack players) / False(popup for Def players)
 //    player_list_section : list of attack player or def player
 //    player_list : list of all players
-    public PopUpSelectPlayer(Activity activity, ArrayList<Player> player_list, ArrayList<Player> player_list_section, boolean isAttack) {
+    public PopUpSelectPlayer(Activity activity, ArrayList<Player> player_list,
+                             ArrayList<Player> player_list_off, ArrayList<Player> player_list_def,
+                             boolean isAttack) {
+
         super(activity, R.style.Theme_AppCompat_Dialog);
-        setContentView(R.layout.template_pop_up_choose_text);
-        if (isAttack())
-            setPlayer_list_off(player_list_section);
-        else
-            setPlayer_list_def(player_list_section);
+        setContentView(R.layout.template_pop_up_select_players);
         setAttack(isAttack);
+        setPlayer_list(player_list);
+        setPlayer_list_off(player_list_off);
+        setPlayer_list_def(player_list_def);
+
         setDatas();
+        setVisibility();
         setPseudo(player_list);
         setOnClicks();
     }
@@ -105,7 +110,7 @@ public class PopUpSelectPlayer extends Dialog {
                 if (checkPlayerSelect(getPlayerByRace(Race.CENTAUR), getListToExclude())) {
                     if (getCentaurValid().getVisibility() == View.INVISIBLE) {
                         getCentaurValid().setVisibility(View.VISIBLE);
-                        getGoodList().add(getPlayerByRace(Race.WEREWOLF));
+                        getGoodList().add(getPlayerByRace(Race.CENTAUR));
                     }
                     else {
                         getCentaurValid().setVisibility(View.INVISIBLE);
@@ -113,15 +118,27 @@ public class PopUpSelectPlayer extends Dialog {
                             getGoodList().remove(getPlayerPositionByRace(getGoodList(), Race.CENTAUR));
                     }
                 }
+                else {
+                    Toast.makeText(getContext(), "Vous ne pouvez pas choisir ce personnage", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-        //TODO appliquer les modifs du centaur aux autres
         getElfButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (checkPlayerSelect(getPlayerByRace(Race.ELF), getListToExclude())) {
-                    getElfValid().setVisibility(View.VISIBLE);
-                    getGoodList().add(getPlayerByRace(Race.ELF));
+                    if (getElfValid().getVisibility() == View.INVISIBLE) {
+                        getElfValid().setVisibility(View.VISIBLE);
+                        getGoodList().add(getPlayerByRace(Race.ELF));
+                    }
+                    else {
+                        getElfValid().setVisibility(View.INVISIBLE);
+                        if (getPlayerPositionByRace(getGoodList(), Race.ELF) >= 0)
+                            getGoodList().remove(getPlayerPositionByRace(getGoodList(), Race.ELF));
+                    }
+                }
+                else {
+                    Toast.makeText(getContext(), "Vous ne pouvez pas choisir ce personnage", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -129,8 +146,18 @@ public class PopUpSelectPlayer extends Dialog {
             @Override
             public void onClick(View v) {
                 if (checkPlayerSelect(getPlayerByRace(Race.FAIRY), getListToExclude())) {
-                    getFairyValid().setVisibility(View.VISIBLE);
-                    getGoodList().add(getPlayerByRace(Race.FAIRY));
+                    if (getFairyValid().getVisibility() == View.INVISIBLE) {
+                        getFairyValid().setVisibility(View.VISIBLE);
+                        getGoodList().add(getPlayerByRace(Race.FAIRY));
+                    }
+                    else {
+                        getFairyValid().setVisibility(View.INVISIBLE);
+                        if (getPlayerPositionByRace(getGoodList(), Race.FAIRY) >= 0)
+                            getGoodList().remove(getPlayerPositionByRace(getGoodList(), Race.FAIRY));
+                    }
+                }
+                else {
+                    Toast.makeText(getContext(), "Vous ne pouvez pas choisir ce personnage", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -138,8 +165,18 @@ public class PopUpSelectPlayer extends Dialog {
             @Override
             public void onClick(View v) {
                 if (checkPlayerSelect(getPlayerByRace(Race.TROLL), getListToExclude())) {
-                    getTrollValid().setVisibility(View.VISIBLE);
-                    getGoodList().add(getPlayerByRace(Race.TROLL));
+                    if (getTrollValid().getVisibility() == View.INVISIBLE) {
+                        getTrollValid().setVisibility(View.VISIBLE);
+                        getGoodList().add(getPlayerByRace(Race.TROLL));
+                    }
+                    else {
+                        getTrollValid().setVisibility(View.INVISIBLE);
+                        if (getPlayerPositionByRace(getGoodList(), Race.TROLL) >= 0)
+                            getGoodList().remove(getPlayerPositionByRace(getGoodList(), Race.TROLL));
+                    }
+                }
+                else {
+                    Toast.makeText(getContext(), "Vous ne pouvez pas choisir ce personnage", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -147,8 +184,18 @@ public class PopUpSelectPlayer extends Dialog {
             @Override
             public void onClick(View v) {
                 if (checkPlayerSelect(getPlayerByRace(Race.GNOME), getListToExclude())) {
-                    getGnomeValid().setVisibility(View.VISIBLE);
-                    getGoodList().add(getPlayerByRace(Race.GNOME));
+                    if (getGnomeValid().getVisibility() == View.INVISIBLE) {
+                        getGnomeValid().setVisibility(View.VISIBLE);
+                        getGoodList().add(getPlayerByRace(Race.GNOME));
+                    }
+                    else {
+                        getGnomeValid().setVisibility(View.INVISIBLE);
+                        if (getPlayerPositionByRace(getGoodList(), Race.GNOME) >= 0)
+                            getGoodList().remove(getPlayerPositionByRace(getGoodList(), Race.GNOME));
+                    }
+                }
+                else {
+                    Toast.makeText(getContext(), "Vous ne pouvez pas choisir ce personnage", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -156,8 +203,18 @@ public class PopUpSelectPlayer extends Dialog {
             @Override
             public void onClick(View v) {
                 if (checkPlayerSelect(getPlayerByRace(Race.WEREWOLF), getListToExclude())) {
-                    getWerewolfValid().setVisibility(View.VISIBLE);
-                    getGoodList().add(getPlayerByRace(Race.WEREWOLF));
+                    if (getWerewolfValid().getVisibility() == View.INVISIBLE) {
+                        getWerewolfValid().setVisibility(View.VISIBLE);
+                        getGoodList().add(getPlayerByRace(Race.WEREWOLF));
+                    }
+                    else {
+                        getWerewolfValid().setVisibility(View.INVISIBLE);
+                        if (getPlayerPositionByRace(getGoodList(), Race.WEREWOLF) >= 0)
+                            getGoodList().remove(getPlayerPositionByRace(getGoodList(), Race.WEREWOLF));
+                    }
+                }
+                else {
+                    Toast.makeText(getContext(), "Vous ne pouvez pas choisir ce personnage", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -174,6 +231,33 @@ public class PopUpSelectPlayer extends Dialog {
 //                getGoodList().add()
             }
         });
+    }
+
+    public void setVisibility() {
+        for (Player player: getGoodList()) {
+            switch(player.get_race()) {
+                case CENTAUR:
+                    getCentaurValid().setVisibility(View.VISIBLE);
+                    break;
+                case ELF:
+                    getElfValid().setVisibility(View.VISIBLE);
+                    break;
+                case FAIRY:
+                    getFairyValid().setVisibility(View.VISIBLE);
+                    break;
+                case GNOME:
+                    getGnomeValid().setVisibility(View.VISIBLE);
+                    break;
+                case TROLL:
+                    getTrollValid().setVisibility(View.VISIBLE);
+                    break;
+                case WEREWOLF:
+                    getWerewolfValid().setVisibility(View.VISIBLE);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     private ArrayList<Player> getListToExclude() {
@@ -215,17 +299,17 @@ public class PopUpSelectPlayer extends Dialog {
 
 //    if the player is already on the other list (off or def) then he is not selectable
 //    if the player is null, there is not player with this race so it is not selectable
-    private boolean checkPlayerSelect(Player player, ArrayList<Player> list_to_exclude) {
+    private boolean checkPlayerSelect(Player player, ArrayList<Player> list) {
         if (player == null)
             return false;
-        for (Player player_in_list:list_to_exclude) {
+        for (Player player_in_list:getListToExclude()) {
             if (player_in_list.get_race() == player.get_race())
                 return false;
         }
         return true;
     }
 
-    public void setPseudo(ArrayList<Player> list) {
+    private void setPseudo(ArrayList<Player> list) {
         for (Player player: list) {
             switch(player.get_race()) {
                 case CENTAUR:

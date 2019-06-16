@@ -1,5 +1,6 @@
 package fr.snargol.lunyver.controler;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,10 +18,10 @@ import java.util.ArrayList;
 
 import fr.snargol.lunyver.R;
 import fr.snargol.lunyver.controler.Adapters.PlayerAdapter;
-import fr.snargol.lunyver.controler.Adapters.PlayerFightAdapter;
 import fr.snargol.lunyver.model.Enums.Class;
 import fr.snargol.lunyver.model.Enums.Race;
 import fr.snargol.lunyver.model.Player;
+import fr.snargol.lunyver.model.PopUpSelectPlayer;
 
 public class PlayersFightActivity extends AppCompatActivity {
     ArrayList<Player> player_list = new ArrayList<>();
@@ -31,30 +32,21 @@ public class PlayersFightActivity extends AppCompatActivity {
     final String FILE_NAME = "datasLUNYVER";
     final String FILE_NAME_OFF = "datasLUNYVERFightOff";
     final String FILE_NAME_DEF = "datasLUNYVERFightDef";
+    Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_players_fight);
 
-//        getPlayer_list_off().add(new Player("Snargolo", 14, 7, Class.THIEF, Race.WEREWOLF));
-//        getPlayer_list_def().add(new Player("Snargola", 14, 7, Class.THIEF, Race.WEREWOLF));
-
-//        try {
-//            saveDatas(getPlayer_list_off(), getFILE_NAME_OFF());
-//            saveDatas(getPlayer_list_def(), getFILE_NAME_DEF());
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-
         try {
             setPlayer_list(loadDatas(FILE_NAME));
-            setPlayer_list_off(loadDatas(FILE_NAME_OFF));
-            setPlayer_list_def(loadDatas(FILE_NAME_DEF));
+//            setPlayer_list_off(loadDatas(FILE_NAME_OFF));
+//            setPlayer_list_def(loadDatas(FILE_NAME_DEF));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        setActivity(this);
         setPlayer_list_view_off((ListView) findViewById(R.id.players_fight_list_off));
         setPlayer_list_view_def((ListView) findViewById(R.id.players_fight_list_def));
 
@@ -67,14 +59,29 @@ public class PlayersFightActivity extends AppCompatActivity {
         addPlayerOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getPlayer_list_off().add(new Player("Snargol", 14, 7, Class.THIEF, Race.WEREWOLF));
-                PlayerAdapter playerAdapterOff = new PlayerAdapter(getApplicationContext(), getPlayer_list_off(), getNames(getPlayer_list_off()));
-                getPlayer_list_view_off().setAdapter(playerAdapterOff);
-                try {
-                    saveDatas(getPlayer_list_off(), getFILE_NAME_OFF());
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+                final PopUpSelectPlayer popUp = new PopUpSelectPlayer(getActivity(), getPlayer_list(), getPlayer_list_off(), getPlayer_list_def(),  true);
+                popUp.getButtonAnnul().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popUp.dismiss();
+                    }
+                });
+                popUp.getButtonValid().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        try {
+                            saveDatas(popUp.getPlayer_list_off(), getFILE_NAME_OFF());
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        setPlayer_list_off(popUp.getPlayer_list_off());
+                        PlayerAdapter playerAdapterOff = new PlayerAdapter(getActivity(), getPlayer_list_off(), getNames(getPlayer_list_off()));
+                        getPlayer_list_view_off().setAdapter(playerAdapterOff);
+                        popUp.dismiss();
+                    }
+                });
+                popUp.build();
             }
         });
 
@@ -82,14 +89,29 @@ public class PlayersFightActivity extends AppCompatActivity {
         addPlayerdef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getPlayer_list_def().add(new Player("Snargol", 14, 7, Class.THIEF, Race.WEREWOLF));
-                PlayerAdapter playerAdapterDef = new PlayerAdapter(getApplicationContext(), getPlayer_list_def(), getNames(getPlayer_list_def()));
-                getPlayer_list_view_def().setAdapter(playerAdapterDef);
-                try {
-                    saveDatas(getPlayer_list_def(), getFILE_NAME_DEF());
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+                final PopUpSelectPlayer popUp = new PopUpSelectPlayer(getActivity(), getPlayer_list(), getPlayer_list_off(), getPlayer_list_def(), false);
+                popUp.getButtonAnnul().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popUp.dismiss();
+                    }
+                });
+                popUp.getButtonValid().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        try {
+                            saveDatas(popUp.getPlayer_list_def(), getFILE_NAME_DEF());
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        setPlayer_list_def(popUp.getPlayer_list_def());
+                        PlayerAdapter playerAdapterDef = new PlayerAdapter(getActivity(), getPlayer_list_def(), getNames(getPlayer_list_def()));
+                        getPlayer_list_view_def().setAdapter(playerAdapterDef);
+                        popUp.dismiss();
+                    }
+                });
+                popUp.build();
             }
         });
 
@@ -252,5 +274,13 @@ public class PlayersFightActivity extends AppCompatActivity {
         }
 
 //        Toast.makeText(getApplicationContext(), "Saved to "+ getFilesDir() + "/" + file_name, Toast.LENGTH_LONG).show();
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
     }
 }

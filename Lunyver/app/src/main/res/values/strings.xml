@@ -18,6 +18,8 @@
     <string name="attaquant">Attaquants</string>
     <string name="defenseur">Défenseurs</string>
     <string name="start_fight">FIGHT</string>
-    <string name="add_player">Ajouter un personnage</string>
-    <string name="title_select_players">Sélectionnez les joueurs</string>
+    <string name="add_player">Sélectionnez les combattants</string>
+    <string name="title_select_players">Sélectionnez les combattants</string>
+    <string name="mob">Mob</string>
+    <string name="boss">Boss</string>
 </resources>
