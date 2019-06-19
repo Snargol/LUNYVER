@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/adapter_player_fight_image_race"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -20,8 +20,8 @@
 
     <ImageView
         android:id="@+id/adapter_player_fight_image_sword"
-        android:layout_width="25dp"
-        android:layout_height="27dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -37,8 +37,8 @@
 
     <ImageView
         android:id="@+id/adapter_player_fight_image_heart"
-        android:layout_width="25dp"
-        android:layout_height="27dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -47,15 +47,15 @@
         android:clickable="false"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        app:layout_constraintEnd_toStartOf="@+id/adapter_player_fight_bonus_defense"
+        app:layout_constraintEnd_toStartOf="@+id/adapter_player_fight_bonus_attack"
         app:layout_constraintStart_toEndOf="@+id/adapter_player_fight_image_shield"
         app:layout_constraintTop_toBottomOf="@+id/adapter_player_fight_text_pseudo"
         app:srcCompat="@drawable/heart" />
 
     <ImageView
         android:id="@+id/adapter_player_fight_image_shield"
-        android:layout_width="23dp"
-        android:layout_height="27dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -64,20 +64,20 @@
         android:clickable="false"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        app:layout_constraintEnd_toStartOf="@+id/adapter_player_fight_bonus_defense"
+        app:layout_constraintEnd_toStartOf="@+id/adapter_player_fight_bonus_attack"
         app:layout_constraintStart_toEndOf="@+id/adapter_player_fight_image_race"
         app:layout_constraintTop_toBottomOf="@+id/adapter_player_fight_text_pseudo"
         app:srcCompat="@drawable/shield" />
 
     <TextView
         android:id="@+id/adapter_player_fight_text_attack"
-        android:layout_width="21dp"
-        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="end"
         android:text="20"
         android:textAlignment="textEnd"
         android:textColor="@color/colorBlack"
-        android:textSize="@dimen/little_titre"
+        android:textSize="@dimen/big_text"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/adapter_player_fight_image_sword"
         app:layout_constraintEnd_toStartOf="@+id/adapter_player_fight_image_sword"
@@ -85,15 +85,15 @@
 
     <TextView
         android:id="@+id/adapter_player_fight_text_life"
-        android:layout_width="21dp"
-        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="2dp"
         android:layout_marginRight="2dp"
         android:gravity="end"
         android:text="20"
         android:textAlignment="textEnd"
         android:textColor="@color/colorBlack"
-        android:textSize="@dimen/little_titre"
+        android:textSize="@dimen/big_text"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/adapter_player_fight_image_heart"
         app:layout_constraintEnd_toStartOf="@+id/adapter_player_fight_image_heart"
@@ -102,13 +102,13 @@
 
     <TextView
         android:id="@+id/adapter_player_fight_text_defense"
-        android:layout_width="21dp"
-        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="end"
         android:text="20"
         android:textAlignment="textEnd"
         android:textColor="@color/colorBlack"
-        android:textSize="@dimen/little_titre"
+        android:textSize="@dimen/big_text"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/adapter_player_fight_image_shield"
         app:layout_constraintEnd_toStartOf="@+id/adapter_player_fight_image_shield"
@@ -144,17 +144,16 @@
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/little_titre"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/adapter_player_fight_bonus_attack"
-        app:layout_constraintStart_toEndOf="@+id/adapter_player_fight_image_race"
+        app:layout_constraintEnd_toEndOf="@+id/adapter_player_fight_image_heart"
+        app:layout_constraintStart_toStartOf="@+id/adapter_player_fight_text_attack"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/adapter_player_fight_bonus_attack"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:background="@drawable/red_round"
         android:gravity="center"
         android:text="+20"
@@ -162,25 +161,26 @@
         android:textSize="@dimen/big_text"
         android:textStyle="bold"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/adapter_player_fight_bonus_defense"
+        app:layout_constraintEnd_toStartOf="@+id/adapter_player_fight_bonus_defense"
+        app:layout_constraintTop_toTopOf="@+id/adapter_player_fight_bonus_defense" />
 
     <TextView
         android:id="@+id/adapter_player_fight_bonus_defense"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="4dp"
         android:background="@drawable/green_round"
-        android:text="+20"
-        android:visibility="invisible"
         android:gravity="center"
+        android:text="+20"
         android:textColor="@color/colorBlack"
-        android:textStyle="bold"
         android:textSize="@dimen/big_text"
+        android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adapter_player_fight_bonus_attack" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
 

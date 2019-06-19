@@ -123,15 +123,21 @@ public class Player implements Serializable {
     public void add_attack(int valueToAdd){
         if (get_attack()+valueToAdd >= 0)
             set_attack(get_attack()+valueToAdd);
+        else
+            set_attack(0);
     }
 
     public void add_defense(int valueToAdd){
         if (get_defense()+valueToAdd >= 0)
             set_defense(get_defense()+valueToAdd);
+        else
+            set_defense(0);
     }
 
     public void add_life(int valueToAdd){
         if (get_life()+valueToAdd >= 0)
             set_life(get_life()+valueToAdd);
+        else
+            set_life(0);
     }
 }

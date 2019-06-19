@@ -70,6 +70,7 @@ public class PopUpSelectPlayer extends Dialog {
         setDatas();
         setVisibility();
         setPseudo(player_list);
+        setOpacity(player_list);
         setOnClicks();
     }
 
@@ -329,6 +330,39 @@ public class PopUpSelectPlayer extends Dialog {
                     break;
                 case WEREWOLF:
                     getWerewolfPseudo().setText(player.get_name());
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private void setOpacity(ArrayList<Player> list) {
+        getCentaurButton().setImageAlpha(150);
+        getElfButton().setImageAlpha(150);
+        getFairyButton().setImageAlpha(150);
+        getGnomeButton().setImageAlpha(150);
+        getTrollButton().setImageAlpha(150);
+        getWerewolfButton().setImageAlpha(150);
+        for (Player player: list) {
+            switch(player.get_race()) {
+                case CENTAUR:
+                    getCentaurButton().setImageAlpha(255);
+                    break;
+                case ELF:
+                    getElfButton().setImageAlpha(255);
+                    break;
+                case FAIRY:
+                    getFairyButton().setImageAlpha(255);
+                    break;
+                case GNOME:
+                    getGnomeButton().setImageAlpha(255);
+                    break;
+                case TROLL:
+                    getTrollButton().setImageAlpha(255);
+                    break;
+                case WEREWOLF:
+                    getWerewolfButton().setImageAlpha(255);
                     break;
                 default:
                     break;

@@ -130,13 +130,10 @@ public class PlayersActivity extends AppCompatActivity {
         buttondes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    loadDatas(FILE_NAME);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
+                Toast.makeText(getApplicationContext(), "des de 8 : "+(0 + (int) Math.round(Math.random()
+                        * ((8 - 0) + 1)) + "   des de 5 : " + (0 + (int) Math.round(Math.random()
+                        * ((5 - 0) + 1)))),Toast.LENGTH_LONG).show();
             }
         });
 

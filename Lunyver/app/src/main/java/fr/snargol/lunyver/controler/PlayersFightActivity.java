@@ -19,11 +19,13 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import fr.snargol.lunyver.R;
+import fr.snargol.lunyver.controler.Adapters.PlayerAdapter;
 import fr.snargol.lunyver.controler.Adapters.PlayerFightAdapter;
 import fr.snargol.lunyver.model.Bonus;
 import fr.snargol.lunyver.model.Enums.Class;
 import fr.snargol.lunyver.model.Enums.Race;
 import fr.snargol.lunyver.model.Player;
+import fr.snargol.lunyver.model.PopUpConfirm;
 import fr.snargol.lunyver.model.PopUpEnterBonus;
 import fr.snargol.lunyver.model.PopUpSelectPlayer;
 
@@ -74,7 +76,6 @@ public class PlayersFightActivity extends AppCompatActivity {
                 popUp.getButtonValid().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                         try {
                             saveDatas(popUp.getPlayer_list_off(), getFILE_NAME_OFF());
                         } catch (FileNotFoundException e) {
@@ -124,7 +125,32 @@ public class PlayersFightActivity extends AppCompatActivity {
         fight_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final Fight fight = new Fight(getPlayer_list_off(), getPlayer_list_def());
+                fight.startFight();
 
+                final PopUpConfirm popUp = new PopUpConfirm(getActivity());
+                popUp.setTitle("Les gagnants sont les "+fight.getWinner() + "s !");
+                popUp.getButtonAnnul().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popUp.dismiss();
+                    }
+                });
+                popUp.getButtonValid().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popUp.dismiss();
+                        try {
+                            saveDatas(getPlayer_list(), getFILE_NAME());
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        Intent playersActivity = new Intent(getApplicationContext(), PlayersActivity.class);
+                        startActivity(playersActivity);
+                        finish();
+                    }
+                });
+                popUp.build();
             }
         });
 
@@ -368,5 +394,9 @@ public class PlayersFightActivity extends AppCompatActivity {
 
     public void setBonus_list(ArrayList<Bonus> bonus_list) {
         this.bonus_list = bonus_list;
+    }
+
+    public String getFILE_NAME() {
+        return FILE_NAME;
     }
 }
