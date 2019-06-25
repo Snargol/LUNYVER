@@ -201,6 +201,53 @@ public class PlayersFightActivity extends AppCompatActivity {
             }
         });
 
+
+        getPlayer_list_view_def().setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                final PopUpEnterBonus popUp = new PopUpEnterBonus(getActivity(), getPlayer_list_def().get(position));
+                if (getBonusById(getPlayer_list_def().get(position).getId()) != null){
+                    popUp.addBonus(getBonusById(getPlayer_list().get(position).getId()));
+                }
+
+                popUp.getButtonAnnul().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popUp.dismiss();
+                    }
+                });
+                popUp.getButtonValid().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (popUp.getInputAttack().getText() != null &&
+                                popUp.getInputDefense().getText() != null &&
+                                popUp.getInputLife().getText() != null) {
+                            popUp.assertTextsNonNull();
+                            int attack = Integer.parseInt(String.valueOf(popUp.getInputAttack().getText()));
+                            int defense = Integer.parseInt(String.valueOf(popUp.getInputDefense().getText()));
+                            int life = Integer.parseInt(String.valueOf(popUp.getInputLife().getText()));
+
+                            //if the bonus already exist then ... else ...
+                            if (getBonusById(getPlayer_list_def().get(position).getId()).getId() != 0){
+                                getBonus_list().set(getPositionOfBonus(getPlayer_list_def().get(position).getId()),
+                                        new Bonus(attack,defense,life,getPlayer_list_def().get(position).getId()));
+                            }
+                            else {
+                                getBonus_list().add(new Bonus(attack,defense,life,getPlayer_list_def().get(position).getId()));
+                            }
+                            PlayerFightAdapter playerAdapterdef = new PlayerFightAdapter(getActivity(), getPlayer_list_def(), getNames(getPlayer_list_def()), getBonus_list());
+                            getPlayer_list_view_def().setAdapter(playerAdapterdef);
+
+                            popUp.dismiss();
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "Veuillez rentrer un bonus dans chaque champ", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                popUp.build();
+            }
+        });
     }
 
     private Bonus getBonusById(int id) {
