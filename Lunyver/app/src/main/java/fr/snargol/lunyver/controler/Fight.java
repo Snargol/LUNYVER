@@ -2,6 +2,7 @@ package fr.snargol.lunyver.controler;
 
 import java.util.ArrayList;
 
+import fr.snargol.lunyver.model.Bonus;
 import fr.snargol.lunyver.model.Enums.Class;
 import fr.snargol.lunyver.model.Enums.Race;
 import fr.snargol.lunyver.model.Player;
@@ -9,11 +10,13 @@ import fr.snargol.lunyver.model.Player;
 public class Fight {
     ArrayList<Player> list_off;
     ArrayList<Player> list_def;
+    ArrayList<Bonus>  list_bonus;
     String winner = "";
 
-    public Fight(ArrayList<Player> list_off, ArrayList<Player> list_def){
+    public Fight(ArrayList<Player> list_off, ArrayList<Player> list_def, ArrayList<Bonus> bonus_list){
         setList_def(list_def);
         setList_off(list_off);
+        setList_bonus(bonus_list);
     }
 
     public void startFight() {
@@ -66,8 +69,8 @@ public class Fight {
         ArrayList<Player> listPlayersWeek = new ArrayList<Player>();
         Player playerweek = new Player("name", Race.NO_RACE, Class.NO_CLASS, 99999, 99999, 99999, 99999, 0, true);
         for (Player player : list) {
-            int numberOfShootsToKillPlayer = (int) Math.round((double) player.get_life() / (playerOff.get_attack() - player.get_defense()));
-            int numberOfShootsToKillPlayerWeek = (int) Math.round((double) playerweek.get_life() / (playerOff.get_attack() - playerweek.get_defense()));
+            int numberOfShootsToKillPlayer = (int) Math.round((double) player.get_life() / (playerOff.get_attack()+ getBonusById(playerOff.getId()).getAttack_bonus() - player.get_defense()+ getBonusById(player.getId()).getDefense_bonus()));
+            int numberOfShootsToKillPlayerWeek = (int) Math.round((double) playerweek.get_life() / (playerOff.get_attack()+ getBonusById(playerOff.getId()).getAttack_bonus() - playerweek.get_defense()+ getBonusById(playerweek.getId()).getDefense_bonus()));
             if (numberOfShootsToKillPlayer < numberOfShootsToKillPlayerWeek || numberOfShootsToKillPlayerWeek < 0) {
                 if (numberOfShootsToKillPlayer == numberOfShootsToKillPlayerWeek){
                     listPlayersWeek.add(player);
@@ -86,13 +89,13 @@ public class Fight {
         ArrayList<Player> listPlayersStrong = new ArrayList<Player>();
         int maxAttack = 0;
         for (Player player:list) {
-            if (player.get_attack() > maxAttack){
-                if (player.get_attack() == maxAttack)
+            if (player.get_attack() + getBonusById(player.getId()).getAttack_bonus() > maxAttack){
+                if (player.get_attack() + getBonusById(player.getId()).getAttack_bonus() == maxAttack)
                     listPlayersStrong.add(player);
                 else {
                     listPlayersStrong = new ArrayList<Player>();
                     listPlayersStrong.add(player);
-                    maxAttack = player.get_attack();
+                    maxAttack = player.get_attack() + getBonusById(player.getId()).getAttack_bonus() ;
                 }
             }
         }
@@ -121,8 +124,9 @@ public class Fight {
     }
 
     private void attack(Player playerOff, Player playerDef) {
-        if (playerOff.get_attack() - playerDef.get_defense() > 0){
-            playerDef.add_life(-(playerOff.get_attack() - playerDef.get_defense()));
+        if ((playerOff.get_attack() + getBonusById(playerOff.getId()).getAttack_bonus()) - (playerDef.get_defense() + getBonusById(playerDef.getId()).getDefense_bonus()) > 0){
+            playerDef.add_life(-((playerOff.get_attack() + getBonusById(playerOff.getId()).getAttack_bonus() )
+                    - (playerDef.get_defense() + getBonusById(playerDef.getId()).getDefense_bonus())));
         }
     }
 
@@ -131,6 +135,16 @@ public class Fight {
             return false;
         else
             return true;
+    }
+
+    private Bonus getBonusById(int id) {
+        int i = 0;
+        for (Bonus bonus:getList_bonus()) {
+            if (bonus.getId() == id)
+                return getList_bonus().get(i);
+            i++;
+        }
+        return new Bonus(0,0,0);
     }
 
     public ArrayList<Player> getList_off() {
@@ -151,5 +165,13 @@ public class Fight {
 
     public String getWinner() {
         return winner;
+    }
+
+    public ArrayList<Bonus> getList_bonus() {
+        return list_bonus;
+    }
+
+    public void setList_bonus(ArrayList<Bonus> list_bonus) {
+        this.list_bonus = list_bonus;
     }
 }

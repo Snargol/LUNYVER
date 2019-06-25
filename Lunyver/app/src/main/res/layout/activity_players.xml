@@ -66,7 +66,7 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/des"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button9"
+            app:layout_constraintEnd_toStartOf="@+id/button_restart"
             app:layout_constraintStart_toEndOf="@+id/button_add_player"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
@@ -101,7 +101,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button9"
+            android:id="@+id/button_restart"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"

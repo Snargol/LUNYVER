@@ -33,10 +33,10 @@ public class PlayerFightAdapter extends ArrayAdapter<String> {
         setBonus_list(bonus_list);
     }
 
-    private Bonus getBonusByRace(Race race) {
+    private Bonus getBonusById(int id) {
         int i = 0;
         for (Bonus bonus:getBonus_list()) {
-            if (bonus.getRace() == race)
+            if (bonus.getId() == id)
                 return getBonus_list().get(i);
             i++;
         }
@@ -56,7 +56,7 @@ public class PlayerFightAdapter extends ArrayAdapter<String> {
 
         Player currentPlayer = getPlayer(position);
         setDatasOnView(currentPlayer, row);
-        setBonus(row, getBonusByRace(currentPlayer.get_race()));
+        setBonus(row, getBonusById(currentPlayer.getId()));
 
         return row;
     }

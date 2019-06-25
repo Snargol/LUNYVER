@@ -2,6 +2,7 @@ package fr.snargol.lunyver.model;
 
 import java.io.Serializable;
 
+import fr.snargol.lunyver.controler.IDGenerator;
 import fr.snargol.lunyver.model.Enums.Class;
 import fr.snargol.lunyver.model.Enums.Race;
 
@@ -16,11 +17,19 @@ public class Player implements Serializable {
     private int _level = 0;
     private int _contributed_money = 0;
     private Boolean _isAlive = true;
+    private int id;
 
     public Player(String _name, Class _class, Race _race) {
         this._name = _name;
         this._class = _class;
         this._race = _race;
+        set_life(0);
+        set_level(0);
+        set_attack(0);
+        set_defense(0);
+        set_contributed_money(0);
+        set_isAlive(true);
+        setId(IDGenerator.getId());
     }
 
     public Player(String _name, int _attack, int _defense, Class _class, Race _race) {
@@ -29,6 +38,11 @@ public class Player implements Serializable {
         this._defense = _defense;
         this._class = _class;
         this._race = _race;
+        set_life(0);
+        set_level(0);
+        set_contributed_money(0);
+        set_isAlive(true);
+        setId(IDGenerator.getId());
     }
 
     public Player(String _name, Race _race, Class _class, int _attack, int _defense, int _life, int _level, int _contributed_money, Boolean _isAlive) {
@@ -41,6 +55,28 @@ public class Player implements Serializable {
         set_level(_level);
         set_contributed_money(_contributed_money);
         set_isAlive(_isAlive);
+        setId(IDGenerator.getId());
+    }
+
+    public Player(String _name, Race _race, Class _class, int _attack, int _defense, int _life, int _level, int _contributed_money, Boolean _isAlive, int id) {
+        set_name(_name);
+        set_attack(_attack);
+        set_defense(_defense);
+        set_life(_life);
+        set_class(_class);
+        set_race(_race);
+        set_level(_level);
+        set_contributed_money(_contributed_money);
+        set_isAlive(_isAlive);
+        setId(id);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String get_name() {

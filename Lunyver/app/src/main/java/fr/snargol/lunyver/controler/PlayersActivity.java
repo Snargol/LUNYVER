@@ -45,7 +45,7 @@ public class PlayersActivity extends AppCompatActivity {
 //        player_list.add(new Player("Zozo", 15, 7 , Class.FLASH, Race.CENTAUR));
 //        player_list.add(new Player("Phelie", 16, 5 , Class.TRAINER, Race.GNOME));
 //        player_list.add(new Player("Jere", 13, 8 , Class.PROTECTOR, Race.ELF));
-
+//
 //        try {
 //            saveDatas(getPlayer_list(), FILE_NAME);
 //        } catch (FileNotFoundException e) {
@@ -116,7 +116,7 @@ public class PlayersActivity extends AppCompatActivity {
             }
         });
 
-        Button buttonFight = (Button) findViewById(R.id.button_fight);
+        Button buttonFight = findViewById(R.id.button_fight);
         buttonFight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,7 +126,15 @@ public class PlayersActivity extends AppCompatActivity {
             }
         });
 
-        Button buttondes = (Button) findViewById(R.id.button_des);
+        Button button_restart = findViewById(R.id.button_restart);
+        button_restart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Files file = new Files(getPlayer_list(), FILE_NAME);
+            }
+        });
+
+        Button buttondes = findViewById(R.id.button_des);
         buttondes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -243,11 +251,10 @@ public class PlayersActivity extends AppCompatActivity {
                 int level = Integer.parseInt(stringList.get(z+6));
                 int money = Integer.parseInt(stringList.get(z+7));
                 Boolean isAlive = Boolean.parseBoolean(stringList.get(z+8));
-                playerList.add(new Player(str,race,_class,attack,defense,life,level,money,isAlive));
-                z += 9;
+                int id = Integer.parseInt(stringList.get(z+9));
+                playerList.add(new Player(str,race,_class,attack,defense,life,level,money,isAlive,id));
+                z += 10;
             }
-
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } finally {
@@ -261,7 +268,6 @@ public class PlayersActivity extends AppCompatActivity {
     public void saveDatas(ArrayList<Player> player_list, String file_name) throws FileNotFoundException {
         FileOutputStream file = null;
 
-
         file = openFileOutput(file_name, MODE_PRIVATE);
 
         for (Player player: player_list) {
@@ -269,7 +275,7 @@ public class PlayersActivity extends AppCompatActivity {
                 String string = player.get_name() + "|" + player.get_race() + "|" +
                         player.get_class() + "|" + player.get_attack() + "|" + player.get_defense() + "|" +
                         player.get_life() + "|" + player.get_level() + "|" + player.get_contributed_money() + "|" +
-                        player.get_isAlive()+"|/";
+                        player.get_isAlive()+"|"+player.getId()+"|/";
                 file.write(string.getBytes());
             } catch (IOException e) {
                 e.printStackTrace();

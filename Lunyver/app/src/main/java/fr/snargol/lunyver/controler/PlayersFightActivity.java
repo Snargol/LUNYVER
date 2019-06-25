@@ -125,7 +125,7 @@ public class PlayersFightActivity extends AppCompatActivity {
         fight_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Fight fight = new Fight(getPlayer_list_off(), getPlayer_list_def());
+                final Fight fight = new Fight(getPlayer_list_off(), getPlayer_list_def(), getBonus_list());
                 fight.startFight();
 
                 final PopUpConfirm popUp = new PopUpConfirm(getActivity());
@@ -158,8 +158,8 @@ public class PlayersFightActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 final PopUpEnterBonus popUp = new PopUpEnterBonus(getActivity(), getPlayer_list_off().get(position));
-                if (getBonusByRace(getPlayer_list_off().get(position).get_race()) != null){
-                    popUp.addBonus(getBonusByRace(getPlayer_list().get(position).get_race()));
+                if (getBonusById(getPlayer_list_off().get(position).getId()) != null){
+                    popUp.addBonus(getBonusById(getPlayer_list().get(position).getId()));
                 }
 
                 popUp.getButtonAnnul().setOnClickListener(new View.OnClickListener() {
@@ -178,12 +178,14 @@ public class PlayersFightActivity extends AppCompatActivity {
                             int attack = Integer.parseInt(String.valueOf(popUp.getInputAttack().getText()));
                             int defense = Integer.parseInt(String.valueOf(popUp.getInputDefense().getText()));
                             int life = Integer.parseInt(String.valueOf(popUp.getInputLife().getText()));
-                            if (getBonusByRace(getPlayer_list_off().get(position).get_race()) != null){
-                                getBonus_list().set(getPositionOfBonus(getPlayer_list_off().get(position).get_race()),
-                                        new Bonus(attack,defense,life,getPlayer_list_off().get(position).get_race()));
+
+                            //if the bonus already exist then ... else ...
+                            if (getBonusById(getPlayer_list_off().get(position).getId()).getId() != 0){
+                                getBonus_list().set(getPositionOfBonus(getPlayer_list_off().get(position).getId()),
+                                        new Bonus(attack,defense,life,getPlayer_list_off().get(position).getId()));
                             }
                             else {
-                                getBonus_list().add(new Bonus(attack,defense,life,getPlayer_list_off().get(position).get_race()));
+                                getBonus_list().add(new Bonus(attack,defense,life,getPlayer_list_off().get(position).getId()));
                             }
                             PlayerFightAdapter playerAdapterOff = new PlayerFightAdapter(getActivity(), getPlayer_list_off(), getNames(getPlayer_list_off()), getBonus_list());
                             getPlayer_list_view_off().setAdapter(playerAdapterOff);
@@ -201,20 +203,20 @@ public class PlayersFightActivity extends AppCompatActivity {
 
     }
 
-    private Bonus getBonusByRace(Race race) {
+    private Bonus getBonusById(int id) {
         int i = 0;
         for (Bonus bonus:getBonus_list()) {
-            if (bonus.getRace() == race)
+            if (bonus.getId() == id)
                 return getBonus_list().get(i);
             i++;
         }
-        return null;
+        return new Bonus(0,0,0);
     }
 
-    private int getPositionOfBonus(Race race) {
+    private int getPositionOfBonus(int id) {
         int i = 0;
         for (Bonus bonus:getBonus_list()) {
-            if (bonus.getRace() == race)
+            if (bonus.getId() == id)
                 return i;
             i++;
         }
@@ -296,7 +298,7 @@ public class PlayersFightActivity extends AppCompatActivity {
 
     public ArrayList<Player> loadDatas(String file_name) throws IOException {
         FileInputStream file = null;
-        ArrayList<Player> playerList = new ArrayList<>();
+        ArrayList<Player> playerList = new ArrayList<Player>();
 
         try {
             file = openFileInput(file_name);
@@ -344,8 +346,9 @@ public class PlayersFightActivity extends AppCompatActivity {
                 int level = Integer.parseInt(stringList.get(z+6));
                 int money = Integer.parseInt(stringList.get(z+7));
                 Boolean isAlive = Boolean.parseBoolean(stringList.get(z+8));
-                playerList.add(new Player(str,race,_class,attack,defense,life,level,money,isAlive));
-                z += 9;
+                int id = Integer.parseInt(stringList.get(z+9));
+                playerList.add(new Player(str,race,_class,attack,defense,life,level,money,isAlive,id));
+                z += 10;
             }
 
 
@@ -370,7 +373,7 @@ public class PlayersFightActivity extends AppCompatActivity {
                 String string = player.get_name() + "|" + player.get_race() + "|" +
                         player.get_class() + "|" + player.get_attack() + "|" + player.get_defense() + "|" +
                         player.get_life() + "|" + player.get_level() + "|" + player.get_contributed_money() + "|" +
-                        player.get_isAlive()+"|/";
+                        player.get_isAlive()+"|"+player.getId()+"|/";
                 file.write(string.getBytes());
             } catch (IOException e) {
                 e.printStackTrace();

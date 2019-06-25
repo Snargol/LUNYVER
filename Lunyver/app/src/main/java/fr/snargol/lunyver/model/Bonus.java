@@ -6,10 +6,18 @@ public class Bonus {
     private int attack_bonus;
     private int defense_bonus;
     private int life_modif;
-    private Race race;
+    private int id;
 
-    public Bonus(int attack, int defense, int life_change, Race race) {
-        setRace(race);
+    public Bonus(int attack, int defense, int life_change, int id) {
+        setId(id);
+        setAttack_bonus(attack);
+        setDefense_bonus(defense);
+        setLife_modif(life_change);
+    }
+
+    public Bonus(int attack, int defense, int life_change) {
+        //id is not use (0 = impossible value)
+        setId(0);
         setAttack_bonus(attack);
         setDefense_bonus(defense);
         setLife_modif(life_change);
@@ -71,11 +79,11 @@ public class Bonus {
         setLife_modif(getLife_modif()+life_modif);
     }
 
-    public Race getRace() {
-        return race;
+    public int getId() {
+        return id;
     }
 
-    public void setRace(Race race) {
-        this.race = race;
+    public void setId(int id) {
+        this.id = id;
     }
 }

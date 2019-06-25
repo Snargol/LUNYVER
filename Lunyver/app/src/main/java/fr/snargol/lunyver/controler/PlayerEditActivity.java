@@ -11,12 +11,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import fr.snargol.lunyver.R;
+import fr.snargol.lunyver.model.Enums.Class;
+import fr.snargol.lunyver.model.Enums.Race;
 import fr.snargol.lunyver.model.Player;
 import fr.snargol.lunyver.model.PopUpChooseClass;
 import fr.snargol.lunyver.model.PopUpChooseRace;
@@ -286,7 +291,7 @@ public class PlayerEditActivity extends AppCompatActivity {
                 String string = player.get_name() + "|" + player.get_race() + "|" +
                         player.get_class() + "|" + player.get_attack() + "|" + player.get_defense() + "|" +
                         player.get_life() + "|" + player.get_level() + "|" + player.get_contributed_money() + "|" +
-                        player.get_isAlive()+"|/";
+                        player.get_isAlive()+"|"+player.getId()+"|/";
                 file.write(string.getBytes());
             } catch (IOException e) {
                 e.printStackTrace();

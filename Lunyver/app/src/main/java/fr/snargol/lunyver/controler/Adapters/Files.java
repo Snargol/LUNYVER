@@ -18,7 +18,20 @@ import fr.snargol.lunyver.model.Player;
 
 public class Files extends AppCompatActivity {
 
-    public Files() {
+    public Files(ArrayList<Player> player, String file) {
+
+        try {
+            saveDatas(player, file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            player = loadDatas(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Toast.makeText(getApplicationContext(), player.get(0).get_name(), Toast.LENGTH_LONG).show();
 
     }
 
@@ -110,6 +123,11 @@ public class Files extends AppCompatActivity {
                         player.get_life() + "|" + player.get_level() + "|" + player.get_contributed_money() + "|" +
                         player.get_isAlive()+"|/";
                 file.write(string.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                file.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
