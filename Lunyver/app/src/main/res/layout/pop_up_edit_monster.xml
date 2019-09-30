@@ -168,7 +168,7 @@
     </android.support.constraint.ConstraintLayout>
 
     <Button
-        android:id="@+id/textView3"
+        android:id="@+id/pop_up_edit_mob_text_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -197,7 +197,7 @@
         android:layout_marginRight="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_edit_mob_text_name"
         app:srcCompat="@drawable/mob" />
 
 

@@ -75,6 +75,16 @@ public class Player implements Serializable {
         return id;
     }
 
+    public void resetPlayer(){
+        set_attack(0);
+        set_defense(0);
+        set_life(0);
+        set_class(Class.NO_CLASS);
+        set_race(Race.NO_RACE);
+        set_level(0);
+        set_contributed_money(0);
+    }
+
     public void setId(int id) {
         this.id = id;
     }

@@ -7,12 +7,13 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:screenOrientation="portrait"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".controler.PlayersFightActivity"></activity>
+        <activity android:name=".controler.MobActivity"></activity>
+        <activity android:name=".controler.PlayersFightActivity" />
         <activity android:name=".controler.PlayerEditActivity" />
         <activity android:name=".controler.PlayersActivity" />
         <activity android:name=".controler.MainActivity">

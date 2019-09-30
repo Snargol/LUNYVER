@@ -22,4 +22,5 @@
     <string name="title_select_players">Sélectionnez les combattants</string>
     <string name="mob">Mob</string>
     <string name="boss">Boss</string>
+    <string name="mob_title">Monstres</string>
 </resources>

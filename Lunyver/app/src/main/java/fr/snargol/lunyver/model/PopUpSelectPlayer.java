@@ -2,6 +2,7 @@ package fr.snargol.lunyver.model;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -12,6 +13,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import fr.snargol.lunyver.R;
+import fr.snargol.lunyver.controler.MobActivity;
+import fr.snargol.lunyver.controler.PlayersFightActivity;
 import fr.snargol.lunyver.model.Enums.Race;
 
 public class PopUpSelectPlayer extends Dialog {
@@ -217,12 +220,6 @@ public class PopUpSelectPlayer extends Dialog {
                 else {
                     Toast.makeText(getContext(), "Vous ne pouvez pas choisir ce personnage", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-        getMobButton().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getMobValid().setVisibility(View.VISIBLE);
             }
         });
         getBossButton().setOnClickListener(new View.OnClickListener() {

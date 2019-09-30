@@ -7,5 +7,6 @@ public enum Race {
     GNOME,
     CENTAUR,
     ELF,
+    MONSTER,
     NO_RACE
 }

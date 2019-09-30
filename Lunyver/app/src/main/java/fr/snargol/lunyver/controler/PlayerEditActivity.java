@@ -20,12 +20,14 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import fr.snargol.lunyver.R;
+import fr.snargol.lunyver.controler.Adapters.PlayerAdapter;
 import fr.snargol.lunyver.model.Enums.Class;
 import fr.snargol.lunyver.model.Enums.Race;
 import fr.snargol.lunyver.model.Player;
 import fr.snargol.lunyver.model.PopUpChooseClass;
 import fr.snargol.lunyver.model.PopUpChooseRace;
 import fr.snargol.lunyver.model.PopUpChooseText;
+import fr.snargol.lunyver.model.PopUpConfirm;
 
 public class PlayerEditActivity extends AppCompatActivity {
 
@@ -67,6 +69,55 @@ public class PlayerEditActivity extends AppCompatActivity {
         final TextView playerLevel = findViewById(R.id.player_edit_level);
         Button but_up_level = findViewById(R.id.player_edit_but_up_level);
         Button but_down_level = findViewById(R.id.player_edit_but_down_level);
+        Button but_up_attack = findViewById(R.id.player_edit_but_up_attack);
+        Button but_down_attack = findViewById(R.id.player_edit_but_down_attack);
+        Button but_up_defense = findViewById(R.id.player_edit_but_up_defense);
+        Button but_down_defense = findViewById(R.id.player_edit_but_down_defense);
+        Button but_up_life = findViewById(R.id.player_edit_but_up_life);
+        Button but_down_life = findViewById(R.id.player_edit_but_down_life);
+        final TextView playerAttack = findViewById(R.id.player_edit_attack);
+        final TextView playerDefense= findViewById(R.id.player_edit_defense);
+        final TextView playerLife = findViewById(R.id.player_edit_life);
+        final ImageButton buttonRace = findViewById(R.id.player_edit_race);
+        final ImageButton buttonClass = findViewById(R.id.player_edit_class);
+        Button but_reset_player = findViewById(R.id.player_edit_but_reset);
+        Button edit_name = (Button) findViewById(R.id.player_edit_name);
+
+        but_reset_player.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final PopUpConfirm popUp = new PopUpConfirm(activity);
+                popUp.setTitle("Voulez vous réinitialiser le personnage " + getPlayer_list().get(position).get_name() + " ?");
+                popUp.getButtonAnnul().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popUp.dismiss();
+                    }
+                });
+                popUp.getButtonValid().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getApplicationContext(), getPlayer_list().get(position).get_name() + " réinitialisé", Toast.LENGTH_SHORT).show();
+                        getPlayer_list().get(getPosition()).resetPlayer();
+                        playerLevel.setText(String.valueOf(getPlayer_list().get(getPosition()).get_level()));
+                        playerAttack.setText(String.valueOf(getPlayer_list().get(getPosition()).get_attack()));
+                        playerDefense.setText(String.valueOf(getPlayer_list().get(getPosition()).get_defense()));
+                        playerLife.setText(String.valueOf(getPlayer_list().get(getPosition()).get_life()));
+                        String ressourceName1 = "race_" + getPlayer_list().get(getPosition()).get_race();
+                        int resId1 = getApplicationContext().getResources().getIdentifier(ressourceName1.toLowerCase(), "drawable", getApplicationContext().getPackageName());
+                        buttonRace.setImageResource(resId1);
+                        String ressourceName2 = "class_" + getPlayer_list().get(getPosition()).get_class();
+                        int resId2 = getApplicationContext().getResources().getIdentifier(ressourceName2.toLowerCase(), "drawable", getApplicationContext().getPackageName());
+                        buttonClass.setImageResource(resId2);
+                        popUp.dismiss();
+                    }
+                });
+                popUp.build();
+
+
+            }
+        });
+
         but_up_level.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,9 +133,6 @@ public class PlayerEditActivity extends AppCompatActivity {
             }
         });
 
-        final TextView playerAttack = findViewById(R.id.player_edit_attack);
-        Button but_up_attack = findViewById(R.id.player_edit_but_up_attack);
-        Button but_down_attack = findViewById(R.id.player_edit_but_down_attack);
         but_up_attack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,9 +148,6 @@ public class PlayerEditActivity extends AppCompatActivity {
             }
         });
 
-        final TextView playerDefense= findViewById(R.id.player_edit_defense);
-        Button but_up_defense = findViewById(R.id.player_edit_but_up_defense);
-        Button but_down_defense = findViewById(R.id.player_edit_but_down_defense);
         but_up_defense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,9 +163,6 @@ public class PlayerEditActivity extends AppCompatActivity {
             }
         });
 
-        final TextView playerLife = findViewById(R.id.player_edit_life);
-        Button but_up_life = findViewById(R.id.player_edit_but_up_life);
-        Button but_down_life = findViewById(R.id.player_edit_but_down_life);
         but_up_life.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,9 +178,7 @@ public class PlayerEditActivity extends AppCompatActivity {
             }
         });
 
-
-        ImageButton chooseClass = findViewById(R.id.player_edit_class);
-        chooseClass.setOnClickListener(new View.OnClickListener() {
+        buttonClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final PopUpChooseClass popUpClass = new PopUpChooseClass(activity);
@@ -147,8 +187,7 @@ public class PlayerEditActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton chooseRace = findViewById(R.id.player_edit_race);
-        chooseRace.setOnClickListener(new View.OnClickListener() {
+        buttonRace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final PopUpChooseRace popUpRace = new PopUpChooseRace(activity);
@@ -157,7 +196,6 @@ public class PlayerEditActivity extends AppCompatActivity {
             }
         });
 
-        Button edit_name = (Button) findViewById(R.id.player_edit_name);
         edit_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

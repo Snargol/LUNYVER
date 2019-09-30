@@ -27,6 +27,7 @@ import fr.snargol.lunyver.model.Enums.Race;
 import fr.snargol.lunyver.model.Player;
 import fr.snargol.lunyver.model.PopUpConfirm;
 import fr.snargol.lunyver.model.PopUpEnterBonus;
+import fr.snargol.lunyver.model.PopUpSelectMob;
 import fr.snargol.lunyver.model.PopUpSelectPlayer;
 
 public class PlayersFightActivity extends AppCompatActivity {
@@ -39,6 +40,8 @@ public class PlayersFightActivity extends AppCompatActivity {
     final String FILE_NAME = "datasLUNYVER";
     final String FILE_NAME_OFF = "datasLUNYVERFightOff";
     final String FILE_NAME_DEF = "datasLUNYVERFightDef";
+    final String FILE_NAME_MOB_OFF = "datasLUNIVERMobOff";
+    final String FILE_NAME_MOB_DEF = "datasLUNIVERMobDef";
     Activity activity;
 
     @Override
@@ -56,6 +59,13 @@ public class PlayersFightActivity extends AppCompatActivity {
         setActivity(this);
         setPlayer_list_view_off((ListView) findViewById(R.id.players_fight_list_off));
         setPlayer_list_view_def((ListView) findViewById(R.id.players_fight_list_def));
+
+//        try {
+//            saveDatas(new ArrayList<Player>(), getFILE_NAME_MOB_OFF());
+//            saveDatas(new ArrayList<Player>(), getFILE_NAME_MOB_DEF());
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
 
         PlayerFightAdapter playerAdapterOff = new PlayerFightAdapter(this, getPlayer_list_off(), getNames(getPlayer_list_off()), getBonus_list());
         getPlayer_list_view_off().setAdapter(playerAdapterOff);
@@ -87,6 +97,37 @@ public class PlayersFightActivity extends AppCompatActivity {
                         popUp.dismiss();
                     }
                 });
+                popUp.getMobButton().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ArrayList<Player> list_mob = new ArrayList<>();
+                        try {
+                            list_mob = loadDatas(getFILE_NAME_MOB_OFF());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        final PopUpSelectMob popUp = new PopUpSelectMob(getActivity(), list_mob);
+                        popUp.getButtonReturn().setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (popUp.getNeedSave()) {
+                                    addOrReplaceAll(getPlayer_list_off(), popUp.getMob_list());
+                                    removeAll(getPlayer_list_off(), popUp.getIdsToRemove());
+                                    try {
+                                        saveDatas(popUp.getMob_list(), getFILE_NAME_MOB_OFF());
+                                    } catch (FileNotFoundException e) {
+                                        e.printStackTrace();
+                                    }
+                                    popUp.setNeedSave(false);
+                                }
+                                PlayerFightAdapter playerAdapterOff = new PlayerFightAdapter(getActivity(), getPlayer_list_off(), getNames(getPlayer_list_off()), getBonus_list());
+                                getPlayer_list_view_off().setAdapter(playerAdapterOff);
+                                popUp.dismiss();
+                            }
+                        });
+                        popUp.build();
+                    }
+                });
                 popUp.build();
             }
         });
@@ -105,16 +146,47 @@ public class PlayersFightActivity extends AppCompatActivity {
                 popUp.getButtonValid().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                    try {
+                        saveDatas(popUp.getPlayer_list_def(), getFILE_NAME_DEF());
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    setPlayer_list_def(popUp.getPlayer_list_def());
+                    PlayerFightAdapter playerAdapterDef = new PlayerFightAdapter(getActivity(), getPlayer_list_def(), getNames(getPlayer_list_def()), getBonus_list());
+                    getPlayer_list_view_def().setAdapter(playerAdapterDef);
+                    popUp.dismiss();
 
+                    }
+                });
+                popUp.getMobButton().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ArrayList<Player> list_mob = new ArrayList<>();
                         try {
-                            saveDatas(popUp.getPlayer_list_def(), getFILE_NAME_DEF());
-                        } catch (FileNotFoundException e) {
+                            list_mob = loadDatas(getFILE_NAME_MOB_DEF());
+                        } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        setPlayer_list_def(popUp.getPlayer_list_def());
-                        PlayerFightAdapter playerAdapterDef = new PlayerFightAdapter(getActivity(), getPlayer_list_def(), getNames(getPlayer_list_def()), getBonus_list());
-                        getPlayer_list_view_def().setAdapter(playerAdapterDef);
-                        popUp.dismiss();
+                        final PopUpSelectMob popUp = new PopUpSelectMob(getActivity(), list_mob);
+                        popUp.getButtonReturn().setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (popUp.getNeedSave()) {
+                                    addOrReplaceAll(getPlayer_list_def(), popUp.getMob_list());
+                                    removeAll(getPlayer_list_def(), popUp.getIdsToRemove());
+                                    try {
+                                        saveDatas(popUp.getMob_list(), getFILE_NAME_MOB_DEF());
+                                    } catch (FileNotFoundException e) {
+                                        e.printStackTrace();
+                                    }
+                                    popUp.setNeedSave(false);
+                                }
+                                PlayerFightAdapter playerAdapterDef = new PlayerFightAdapter(getActivity(), getPlayer_list_def(), getNames(getPlayer_list_def()), getBonus_list());
+                                getPlayer_list_view_def().setAdapter(playerAdapterDef);
+                                popUp.dismiss();
+                            }
+                        });
+                        popUp.build();
                     }
                 });
                 popUp.build();
@@ -268,6 +340,41 @@ public class PlayersFightActivity extends AppCompatActivity {
             i++;
         }
         return -1;
+    }
+
+    public void removeAll(ArrayList<Player> list, ArrayList<Integer> ids) {
+        for (int id:ids) {
+            list.remove(getPositionById(list, id));
+        }
+    }
+
+    public void addOrReplaceAll(ArrayList<Player> list, ArrayList<Player> listToAdd) {
+        int i=0;
+        for (Player player: listToAdd) {
+            if (!existOn(player, list))
+                list.add(player);
+            else
+                list.set(i, player);
+            i++;
+        }
+    }
+
+    public boolean existOn(Player player, ArrayList<Player> list){
+        for (Player playerOnList: list) {
+            if (player.getId() == playerOnList.getId())
+                return true;
+        }
+        return false;
+    }
+
+    public int getPositionById(ArrayList<Player> list, int id){
+        int i = 0;
+        for (Player player:list) {
+            if (player.getId() == id)
+                return i;
+            i++;
+        }
+        return i;
     }
 
     @Override
@@ -448,5 +555,13 @@ public class PlayersFightActivity extends AppCompatActivity {
 
     public String getFILE_NAME() {
         return FILE_NAME;
+    }
+
+    public String getFILE_NAME_MOB_OFF() {
+        return FILE_NAME_MOB_OFF;
+    }
+
+    public String getFILE_NAME_MOB_DEF() {
+        return FILE_NAME_MOB_DEF;
     }
 }
