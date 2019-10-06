@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".controler.MobActivity"></activity>
+        <activity android:name=".controler.PlayersFightActivity2"></activity>
+        <activity android:name=".controler.MobActivity" />
         <activity android:name=".controler.PlayersFightActivity" />
         <activity android:name=".controler.PlayerEditActivity" />
         <activity android:name=".controler.PlayersActivity" />

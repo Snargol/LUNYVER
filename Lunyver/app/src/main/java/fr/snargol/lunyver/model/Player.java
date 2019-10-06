@@ -5,6 +5,7 @@ import java.io.Serializable;
 import fr.snargol.lunyver.controler.IDGenerator;
 import fr.snargol.lunyver.model.Enums.Class;
 import fr.snargol.lunyver.model.Enums.Race;
+import fr.snargol.lunyver.model.Enums.Statu;
 
 public class Player implements Serializable {
 
@@ -17,7 +18,10 @@ public class Player implements Serializable {
     private int _level = 0;
     private int _contributed_money = 0;
     private Boolean _isAlive = true;
+    private Boolean _isSelectable = false;
+    private Statu statu = Statu.NOTHING;
     private int id;
+
 
     public Player(String _name, Class _class, Race _race) {
         this._name = _name;
@@ -30,6 +34,7 @@ public class Player implements Serializable {
         set_contributed_money(0);
         set_isAlive(true);
         setId(IDGenerator.getId());
+        set_isSelectable(false);
     }
 
     public Player(String _name, int _attack, int _defense, Class _class, Race _race) {
@@ -43,6 +48,7 @@ public class Player implements Serializable {
         set_contributed_money(0);
         set_isAlive(true);
         setId(IDGenerator.getId());
+        set_isSelectable(false);
     }
 
     public Player(String _name, Race _race, Class _class, int _attack, int _defense, int _life, int _level, int _contributed_money, Boolean _isAlive) {
@@ -56,6 +62,7 @@ public class Player implements Serializable {
         set_contributed_money(_contributed_money);
         set_isAlive(_isAlive);
         setId(IDGenerator.getId());
+        set_isSelectable(false);
     }
 
     public Player(String _name, Race _race, Class _class, int _attack, int _defense, int _life, int _level, int _contributed_money, Boolean _isAlive, int id) {
@@ -69,6 +76,7 @@ public class Player implements Serializable {
         set_contributed_money(_contributed_money);
         set_isAlive(_isAlive);
         setId(id);
+        set_isSelectable(false);
     }
 
     public int getId() {
@@ -83,6 +91,35 @@ public class Player implements Serializable {
         set_race(Race.NO_RACE);
         set_level(0);
         set_contributed_money(0);
+        deleteTempDatas();
+    }
+
+    public void setPlayer(Player p){
+        set_name(p.get_name());
+        set_attack(p.get_attack());
+        set_defense(p.get_defense());
+        set_life(p.get_life());
+        set_class(p.get_class());
+        set_race(p.get_race());
+        set_contributed_money(p.get_contributed_money());
+        setId(p.getId());
+        set_isSelectable(p.get_isSelectable());
+        set_isAlive(p.get_isAlive());
+        setStatu(p.getStatu());
+
+    }
+
+    public void deleteTempDatas() {
+        setStatu(Statu.NOTHING);
+        set_isSelectable(false);
+    }
+
+    public Boolean get_isSelectable() {
+        return _isSelectable;
+    }
+
+    public void set_isSelectable(Boolean _isSelectable) {
+        this._isSelectable = _isSelectable;
     }
 
     public void setId(int id) {
@@ -147,6 +184,14 @@ public class Player implements Serializable {
 
     public int get_contributed_money() {
         return _contributed_money;
+    }
+
+    public Statu getStatu() {
+        return statu;
+    }
+
+    public void setStatu(Statu statu) {
+        this.statu = statu;
     }
 
     public void set_contributed_money(int _contributed_money) {

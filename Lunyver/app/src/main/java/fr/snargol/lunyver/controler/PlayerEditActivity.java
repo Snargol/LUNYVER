@@ -2,6 +2,7 @@ package fr.snargol.lunyver.controler;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,18 +12,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import fr.snargol.lunyver.R;
-import fr.snargol.lunyver.controler.Adapters.PlayerAdapter;
-import fr.snargol.lunyver.model.Enums.Class;
-import fr.snargol.lunyver.model.Enums.Race;
 import fr.snargol.lunyver.model.Player;
 import fr.snargol.lunyver.model.PopUpChooseClass;
 import fr.snargol.lunyver.model.PopUpChooseRace;
@@ -47,6 +46,7 @@ public class PlayerEditActivity extends AppCompatActivity {
         }
         setPosition(position);
         setDatasOnView(getPlayer_list().get(getPosition()));
+        int test = getPlayer_list().get(getPosition()).getId();
 
         setOnClick(this);
 
@@ -56,11 +56,7 @@ public class PlayerEditActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         Intent activity = new Intent(getApplicationContext(), PlayersActivity.class);
-        try {
-            saveDatas(getPlayer_list(), FILE_NAME);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        saveData(getPlayer_list(), FILE_NAME);
         startActivity(activity);
         finish();
     }
@@ -216,11 +212,7 @@ public class PlayerEditActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (popUp.getInputText().getText().length() != 0){
                     getPlayer_list().get(getPosition()).set_name(String.valueOf(popUp.getInputText().getText()));
-                    try {
-                        saveDatas(getPlayer_list(), FILE_NAME);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+                    saveData(getPlayer_list(), FILE_NAME);
                     Button button_name = findViewById(R.id.player_edit_name);
                     button_name.setText(getPlayer_list().get(getPosition()).get_name());
                     popUp.dismiss();
@@ -337,6 +329,30 @@ public class PlayerEditActivity extends AppCompatActivity {
         }
 
 //        Toast.makeText(getApplicationContext(), "Saved to "+ getFilesDir() + "/" + file_name, Toast.LENGTH_LONG).show();
+    }
+
+    private void saveData(ArrayList<Player> list2Save, String nameList2Save) {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(list2Save);
+        editor.putString(nameList2Save, json);
+        editor.apply();
+    }
+
+    private ArrayList<Player> loadData(String nameList2Get) {
+        ArrayList<Player> list2Return = new ArrayList<>();
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(nameList2Get, null);
+        Type type = new TypeToken<ArrayList<Player>>() {}.getType();
+        list2Return = gson.fromJson(json, type);
+
+        if (list2Return == null) {
+            list2Return = new ArrayList<>();
+        }
+
+        return list2Return;
     }
 
     public ArrayList<Player> getPlayer_list() {
