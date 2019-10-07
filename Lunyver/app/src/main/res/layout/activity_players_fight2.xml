@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="290dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/players_fight_title">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/players_fight_list_off"
+            android:layout_width="320dp"
+            android:layout_height="180dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/players_fight_title_off" >
+
+            <ImageButton
+                android:id="@+id/players_fight_select_button_3_off"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@null"
+                android:padding="0dp"
+                android:scaleType="centerInside"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/players_fight_select_button_2_off"
+                app:layout_constraintTop_toTopOf="@+id/players_fight_select_button_2_off"
+                app:srcCompat="@drawable/race_centaur" />
+
+            <ImageButton
+                android:id="@+id/players_fight_select_button_1_off"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@null"
+                android:padding="0dp"
+                android:scaleType="centerInside"
+                app:layout_constraintEnd_toStartOf="@+id/players_fight_select_button_2_off"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/players_fight_select_button_2_off"
+                app:srcCompat="@drawable/race_troll" />
+
+            <ImageButton
+                android:id="@+id/players_fight_select_button_5_off"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="40dp"
+                android:background="@null"
+                android:padding="0dp"
+                android:scaleType="centerInside"
+                app:layout_constraintEnd_toEndOf="@+id/players_fight_select_button_2_off"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/players_fight_select_button_2_off"
+                app:layout_constraintTop_toBottomOf="@+id/players_fight_select_button_2_off"
+                app:srcCompat="@drawable/race_elf" />
+
+            <ImageButton
+                android:id="@+id/players_fight_select_button_6_off"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:padding="0dp"
+                android:scaleType="centerInside"
+                app:layout_constraintEnd_toEndOf="@+id/players_fight_select_button_3_off"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/players_fight_select_button_3_off"
+                app:layout_constraintTop_toTopOf="@+id/players_fight_select_button_5_off"
+                app:srcCompat="@drawable/race_fairy" />
+
+            <ImageButton
+                android:id="@+id/players_fight_select_button_2_off"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@null"
+                android:padding="0dp"
+                android:scaleType="centerInside"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.501"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/players_fight_pseudo_text_2_off"
+                app:srcCompat="@drawable/race_gnome" />
+
+            <ImageButton
+                android:id="@+id/players_fight_select_button_4_off"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:padding="0dp"
+                android:scaleType="centerInside"
+                app:layout_constraintEnd_toEndOf="@+id/players_fight_select_button_1_off"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/players_fight_select_button_1_off"
+                app:layout_constraintTop_toTopOf="@+id/players_fight_select_button_5_off"
+                app:srcCompat="@drawable/race_werewolf" />
+
+            <TextView
+                android:id="@+id/players_fight_pseudo_text_1_off"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="TextView"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"
+                app:layout_constraintBottom_toTopOf="@+id/players_fight_select_button_1_off"
+                app:layout_constraintEnd_toEndOf="@+id/players_fight_select_button_1_off"
+                app:layout_constraintStart_toStartOf="@+id/players_fight_select_button_1_off" />
+
+            <TextView
+                android:id="@+id/players_fight_pseudo_text_2_off"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="TextView"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"
+                app:layout_constraintEnd_toEndOf="@+id/players_fight_select_button_2_off"
+                app:layout_constraintStart_toStartOf="@+id/players_fight_select_button_2_off"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/players_fight_pseudo_text_3_off"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="TextView"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"
+                app:layout_constraintBottom_toTopOf="@+id/players_fight_select_button_3_off"
+                app:layout_constraintEnd_toEndOf="@+id/players_fight_select_button_3_off"
+                app:layout_constraintStart_toStartOf="@+id/players_fight_select_button_3_off" />
+
+            <TextView
+                android:id="@+id/players_fight_pseudo_text_4_off"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="TextView"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"
+                app:layout_constraintBottom_toTopOf="@+id/players_fight_select_button_4_off"
+                app:layout_constraintEnd_toEndOf="@+id/players_fight_select_button_4_off"
+                app:layout_constraintStart_toStartOf="@+id/players_fight_select_button_4_off" />
+
+            <TextView
+                android:id="@+id/players_fight_pseudo_text_5_off"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="TextView"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"
+                app:layout_constraintBottom_toTopOf="@+id/players_fight_select_button_5_off"
+                app:layout_constraintEnd_toEndOf="@+id/players_fight_select_button_5_off"
+                app:layout_constraintStart_toStartOf="@+id/players_fight_select_button_5_off" />
+
+            <TextView
+                android:id="@+id/players_fight_pseudo_text_6_off"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="TextView"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"
+                app:layout_constraintBottom_toTopOf="@+id/players_fight_select_button_6_off"
+                app:layout_constraintEnd_toEndOf="@+id/players_fight_select_button_6_off"
+                app:layout_constraintStart_toStartOf="@+id/players_fight_select_button_6_off" />
+
+            <ImageView
+                android:id="@+id/players_fight_valid_image_1_off"
+                android:layout_width="65dp"
+                android:layout_height="80dp"
+                android:scaleType="fitXY"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/players_fight_select_button_1_off"
+                app:layout_constraintEnd_toEndOf="@+id/players_fight_select_button_1_off"
+                app:layout_constraintStart_toStartOf="@+id/players_fight_select_button_1_off"
+                app:layout_constraintTop_toTopOf="@+id/players_fight_pseudo_text_1_off"
+                app:srcCompat="@drawable/green_border" />
+
+            <ImageView
+                android:id="@+id/players_fight_valid_image_2_off"
+                android:layout_width="65dp"
+                android:layout_height="80dp"
+                android:scaleType="fitXY"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/players_fight_select_button_2_off"
+                app:layout_constraintEnd_toEndOf="@+id/players_fight_select_button_2_off"
+                app:layout_constraintStart_toStartOf="@+id/players_fight_select_button_2_off"
+                app:layout_constraintTop_toTopOf="@+id/players_fight_pseudo_text_2_off"
+                app:srcCompat="@drawable/green_border" />
+
+            <ImageView
+                android:id="@+id/players_fight_valid_image_3_off"
+                android:layout_width="65dp"
+                android:layout_height="80dp"
+                android:scaleType="fitXY"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/players_fight_select_button_3_off"
+                app:layout_constraintEnd_toEndOf="@+id/players_fight_select_button_3_off"
+                app:layout_constraintStart_toStartOf="@+id/players_fight_select_button_3_off"
+                app:layout_constraintTop_toTopOf="@+id/players_fight_pseudo_text_3_off"
+                app:srcCompat="@drawable/green_border" />
+
+            <ImageView
+                android:id="@+id/players_fight_valid_image_4_off"
+                android:layout_width="65dp"
+                android:layout_height="80dp"
+                android:scaleType="fitXY"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/players_fight_select_button_4_off"
+                app:layout_constraintEnd_toEndOf="@+id/players_fight_select_button_4_off"
+                app:layout_constraintStart_toStartOf="@+id/players_fight_select_button_4_off"
+                app:layout_constraintTop_toTopOf="@+id/players_fight_pseudo_text_4_off"
+                app:srcCompat="@drawable/green_border" />
+
+            <ImageView
+                android:id="@+id/players_fight_valid_image_5_off"
+                android:layout_width="65dp"
+                android:layout_height="80dp"
+                android:scaleType="fitXY"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/players_fight_select_button_5_off"
+                app:layout_constraintEnd_toEndOf="@+id/players_fight_select_button_5_off"
+                app:layout_constraintStart_toStartOf="@+id/players_fight_select_button_5_off"
+                app:layout_constraintTop_toTopOf="@+id/players_fight_pseudo_text_5_off"
+                app:srcCompat="@drawable/green_border" />
+
+            <ImageView
+                android:id="@+id/players_fight_valid_image_6_off"
+                android:layout_width="65dp"
+                android:layout_height="80dp"
+                android:scaleType="fitXY"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/players_fight_select_button_6_off"
+                app:layout_constraintEnd_toEndOf="@+id/players_fight_select_button_6_off"
+                app:layout_constraintStart_toStartOf="@+id/players_fight_select_button_6_off"
+                app:layout_constraintTop_toTopOf="@+id/players_fight_pseudo_text_6_off"
+                app:srcCompat="@drawable/green_border" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/players_fight_title_off"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="@string/attaquant"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/little_titre"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/players_fight_off_right_arrow"
+            android:layout_width="30dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@null"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/right_arrow" />
+
+        <ImageButton
+            android:id="@+id/players_fight_off_left_arrow"
+            android:layout_width="22dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@null"
+            android:visibility="invisible"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/left_arrow" />
+
+        <TextView
+            android:id="@+id/players_fight_text_total_off_off"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="0"
+            android:textColor="@color/colorBlack"
+            app:layout_constraintEnd_toStartOf="@+id/players_fight_text_total_off_def"
+            android:textSize="@dimen/text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/players_fight_text_total_off_def" />
+
+        <TextView
+            android:id="@+id/players_fight_text_total_off_def"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="0"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/players_fight_list_off" />
+
+        <TextView
+            android:id="@+id/players_fight_text_total_off_life"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="0"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/players_fight_text_total_off_def"
+            app:layout_constraintTop_toTopOf="@+id/players_fight_text_total_off_def" />
+
+        <ImageView
+            android:id="@+id/imageView25"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/players_fight_text_total_off_off"
+            app:layout_constraintHorizontal_bias="0.47"
+            app:layout_constraintStart_toStartOf="@+id/players_fight_text_total_off_off"
+            app:layout_constraintTop_toBottomOf="@+id/players_fight_text_total_off_off"
+            app:srcCompat="@drawable/sword" />
+
+        <ImageView
+            android:id="@+id/imageView26"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/players_fight_text_total_off_def"
+            app:layout_constraintStart_toStartOf="@+id/players_fight_text_total_off_def"
+            app:layout_constraintTop_toBottomOf="@+id/players_fight_text_total_off_def"
+            app:srcCompat="@drawable/shield" />
+
+        <ImageView
+            android:id="@+id/imageView27"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/players_fight_text_total_off_life"
+            app:layout_constraintStart_toStartOf="@+id/players_fight_text_total_off_life"
+            app:layout_constraintTop_toBottomOf="@+id/players_fight_text_total_off_life"
+            app:srcCompat="@drawable/heart" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="290dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout7">
+
+        <ListView
+            android:id="@+id/players_fight_list_def"
+            android:layout_width="320dp"
+            android:layout_height="180dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/players_fight_add_def"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/players_fight_title_def" />
+
+        <TextView
+            android:id="@+id/players_fight_title_def"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="@string/defenseur"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/little_titre"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/players_fight_text_total_def_off"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toStartOf="@+id/players_fight_text_total_def_def"
+            app:layout_constraintHorizontal_bias="0.506"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/players_fight_text_total_def_def" />
+
+        <TextView
+            android:id="@+id/players_fight_text_total_def_def"
+            android:layout_width="63dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/players_fight_list_def" />
+
+        <TextView
+            android:id="@+id/players_fight_text_total_def_life"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/players_fight_text_total_def_def"
+            app:layout_constraintTop_toTopOf="@+id/players_fight_text_total_def_def" />
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/players_fight_text_total_def_off"
+            app:layout_constraintStart_toStartOf="@+id/players_fight_text_total_def_off"
+            app:layout_constraintTop_toBottomOf="@+id/players_fight_text_total_def_off"
+            app:srcCompat="@drawable/sword" />
+
+        <ImageView
+            android:id="@+id/imageView16"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="@+id/players_fight_text_total_def_def"
+            app:layout_constraintHorizontal_bias="0.333"
+            app:layout_constraintStart_toStartOf="@+id/players_fight_text_total_def_def"
+            app:layout_constraintTop_toBottomOf="@+id/players_fight_text_total_def_def"
+            app:srcCompat="@drawable/shield" />
+
+        <ImageView
+            android:id="@+id/imageView18"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/players_fight_text_total_def_life"
+            app:layout_constraintStart_toStartOf="@+id/players_fight_text_total_def_life"
+            app:layout_constraintTop_toBottomOf="@+id/players_fight_text_total_def_life"
+            app:srcCompat="@drawable/heart" />
+
+        <ImageButton
+            android:id="@+id/players_fight_def_right_arrow"
+            android:layout_width="30dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@null"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/right_arrow" />
+
+        <ImageButton
+            android:id="@+id/players_fight_def_left_arrow"
+            android:layout_width="30dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@null"
+            android:scaleType="centerInside"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/left_arrow" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/players_fight_button_fight"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/colorGreenPale"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/little_titre"
+        android:text="@string/start_fight"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/players_fight_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/fight"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/middle_titre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>
