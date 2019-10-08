@@ -1,5 +1,7 @@
 package fr.snargol.lunyver.model;
 
+import android.content.Context;
+
 import java.io.Serializable;
 
 import fr.snargol.lunyver.controler.IDGenerator;
@@ -13,13 +15,15 @@ public class Player implements Serializable {
     private int _attack = 0;
     private int _defense = 0;
     private int _life = 20;
+    private int _bonus_attack = 0;
+    private int _bonus_defense = 0;
     private Class _class;
     private Race _race;
     private int _level = 0;
     private int _contributed_money = 0;
     private Boolean _isAlive = true;
     private Boolean _isSelectable = false;
-    private Statu statu = Statu.NOTHING;
+    private Statu _statu = Statu.NOTHING;
     private int id;
 
 
@@ -105,13 +109,30 @@ public class Player implements Serializable {
         setId(p.getId());
         set_isSelectable(p.get_isSelectable());
         set_isAlive(p.get_isAlive());
-        setStatu(p.getStatu());
+        set_statu(p.get_statu());
+    }
 
+    public void generateId() {
+        setId(IDGenerator.getId());
     }
 
     public void deleteTempDatas() {
-        setStatu(Statu.NOTHING);
+        set_statu(Statu.NOTHING);
         set_isSelectable(false);
+        set_bonus_attack(0);
+        set_bonus_defense(0);
+    }
+
+    public int getRessourceIdRace(Context context) {
+        String ressourceName = "race_" + get_race();
+        int resId = context.getResources().getIdentifier(ressourceName.toLowerCase(), "drawable", context.getPackageName());
+        return resId;
+    }
+
+    public int getRessourceIdClass(Context context){
+        String ressourceName = "class_" + get_class();
+        int resId = context.getResources().getIdentifier(ressourceName.toLowerCase(), "drawable", context.getPackageName());
+        return resId;
     }
 
     public Boolean get_isSelectable() {
@@ -186,12 +207,12 @@ public class Player implements Serializable {
         return _contributed_money;
     }
 
-    public Statu getStatu() {
-        return statu;
+    public Statu get_statu() {
+        return _statu;
     }
 
-    public void setStatu(Statu statu) {
-        this.statu = statu;
+    public void set_statu(Statu _statu) {
+        this._statu = _statu;
     }
 
     public void set_contributed_money(int _contributed_money) {
@@ -230,5 +251,21 @@ public class Player implements Serializable {
             set_life(get_life()+valueToAdd);
         else
             set_life(0);
+    }
+
+    public int get_bonus_attack() {
+        return _bonus_attack;
+    }
+
+    public void set_bonus_attack(int _bonus_attack) {
+        this._bonus_attack = _bonus_attack;
+    }
+
+    public int get_bonus_defense() {
+        return _bonus_defense;
+    }
+
+    public void set_bonus_defense(int _bonus_defense) {
+        this._bonus_defense = _bonus_defense;
     }
 }

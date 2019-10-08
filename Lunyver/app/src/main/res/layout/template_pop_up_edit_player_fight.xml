@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="center"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/pop_up_edit_player_text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:textStyle="bold"
+        android:textSize="@dimen/middle_titre"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"
+        android:text="@string/title_add_bonus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/pop_up_edit_player_text_pseudo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        android:text="@string/app_name"
+        android:textSize="@dimen/little_titre"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_edit_player_text_title"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_edit_player_text_title"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_edit_player_text_title" />
+
+    <ImageButton
+        android:id="@+id/pop_up_edit_player_button_reset"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@null"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pop_up_edit_player_text_title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/refresh" />
+
+    <ImageView
+        android:id="@+id/pop_up_edit_player_image_race"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_edit_player_text_pseudo"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_edit_player_text_pseudo"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_edit_player_text_pseudo"
+        app:srcCompat="@drawable/race_werewolf" />
+
+    <ImageView
+        android:id="@+id/pop_up_edit_player_image_class"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_edit_player_image_race"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_edit_player_image_race"
+        app:layout_constraintStart_toEndOf="@+id/pop_up_edit_player_image_race"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_edit_player_image_race"
+        app:srcCompat="@drawable/class_berserk" />
+
+    <ImageView
+        android:id="@+id/pop_up_edit_player_image_sword"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_edit_player_text_off"
+        app:layout_constraintHorizontal_bias="0.44"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_edit_player_text_off"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_edit_player_text_off"
+        app:srcCompat="@drawable/sword" />
+
+    <EditText
+        android:id="@+id/pop_up_edit_player_text_off"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="numberDecimal"
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_edit_player_text_def"
+        app:layout_constraintEnd_toStartOf="@+id/pop_up_edit_player_text_def"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pop_up_edit_player_text_def" />
+
+    <EditText
+        android:id="@+id/pop_up_edit_player_text_def"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="numberDecimal"
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_edit_player_image_class" />
+
+    <EditText
+        android:id="@+id/pop_up_edit_player_text_life"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="numberDecimal"
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_edit_player_button_left_arrow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pop_up_edit_player_text_def"
+        app:layout_constraintTop_toTopOf="@+id/pop_up_edit_player_text_def" />
+
+    <ImageView
+        android:id="@+id/pop_up_edit_player_image_shield"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_edit_player_text_def"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_edit_player_text_def"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_edit_player_text_def"
+        app:srcCompat="@drawable/shield" />
+
+    <ImageView
+        android:id="@+id/pop_up_edit_player_image_hearth"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_edit_player_text_life"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_edit_player_text_life"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_edit_player_text_life"
+        app:srcCompat="@drawable/heart" />
+
+    <EditText
+        android:id="@+id/pop_up_edit_player_text_bonus_off"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:focusedByDefault="true"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_edit_player_text_off"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_edit_player_text_off"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_edit_player_image_sword" />
+
+    <EditText
+        android:id="@+id/pop_up_edit_player_text_bonus_def"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_edit_player_text_def"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_edit_player_text_def"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_edit_player_image_shield" />
+
+
+    <Button
+        android:id="@+id/pop_up_edit_player_button_valid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorGreen"
+        android:text="@string/valid"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_edit_player_text_bonus_def" />
+
+    <ImageButton
+        android:id="@+id/pop_up_edit_player_button_left_arrow"
+        android:layout_width="30dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@null"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_edit_player_text_off"
+        app:layout_constraintEnd_toStartOf="@+id/pop_up_edit_player_text_off"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_edit_player_image_race"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/left_arrow" />
+
+    <ImageButton
+        android:id="@+id/pop_up_edit_player_button_right_arrow"
+        android:layout_width="30dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@null"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_edit_player_text_life"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pop_up_edit_player_text_life"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_edit_player_image_race"
+        app:srcCompat="@drawable/right_arrow" />
+
+</android.support.constraint.ConstraintLayout>

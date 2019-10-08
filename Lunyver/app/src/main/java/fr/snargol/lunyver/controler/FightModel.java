@@ -17,6 +17,7 @@ import fr.snargol.lunyver.model.Enums.Class;
 import fr.snargol.lunyver.model.Enums.Race;
 import fr.snargol.lunyver.model.Enums.Statu;
 import fr.snargol.lunyver.model.Player;
+import fr.snargol.lunyver.model.PopUpEditPlayer;
 
 public class FightModel {
 //    Il y a trop d'arguments, ils sont donc stoqués dans le model pour éviter de s'y perdre
@@ -75,16 +76,18 @@ public class FightModel {
 
     ArrayList<ImageView> green_borders_off_list = new ArrayList<>();
     ArrayList<ImageButton> buttons_off_list = new ArrayList<>();
-    ArrayList<Player> player_list = new ArrayList<>();
+//    ArrayList<Player> player_list = new ArrayList<>();
     ArrayList<Player> player_list_off = new ArrayList<>();
-    ArrayList<Player> display_player_list_off = new ArrayList<>();
+    ArrayList<Player> all_player_list = new ArrayList<>();
     ArrayList<Player> mob_list = new ArrayList<>();
     ArrayList<Player> player_list_def = new ArrayList<>();
-    ArrayList<Player> display_player_list_def = new ArrayList<>();
     ArrayList<Bonus> bonus_list = new ArrayList<>();
 
+    private boolean OffDisplayMonster = false;
+    private boolean DefDisplayMonster = false;
 
     final String FILE_NAME = "datasLUNYVER";
+    final String FILE_NAME_MOBS = "datasLUNYVERMOBS";
     final String FILE_NAME_OFF = "datasLUNYVERFightOff";
     final String FILE_NAME_DEF = "datasLUNYVERFightDef";
     final String FILE_NAME_MOB_OFF = "datasLUNIVERMobOff";
@@ -92,20 +95,29 @@ public class FightModel {
     Activity activity;
 
     public FightModel() {
-        getMob_list().add(new Player("Monstre 1", Class.NO_CLASS, Race.MONSTER));
-        getMob_list().add(new Player("Monstre 2", Class.NO_CLASS, Race.MONSTER));
-        getMob_list().add(new Player("Monstre 3", Class.NO_CLASS, Race.MONSTER));
-        getMob_list().add(new Player("Monstre 4", Class.NO_CLASS, Race.MONSTER));
-        getMob_list().add(new Player("Monstre 5", Class.NO_CLASS, Race.MONSTER));
-        getMob_list().add(new Player("Monstre 6", Class.NO_CLASS, Race.MONSTER));
+        getMob_list().add(new Player("Mob 1", Class.NO_CLASS, Race.MONSTER));
+        getMob_list().add(new Player("Mob 2", Class.NO_CLASS, Race.MONSTER));
+        getMob_list().add(new Player("Mob 3", Class.NO_CLASS, Race.MONSTER));
+        getMob_list().add(new Player("Mob 4", Class.NO_CLASS, Race.MONSTER));
+        getMob_list().add(new Player("Mob 5", Class.NO_CLASS, Race.MONSTER));
+        getMob_list().add(new Player("Mob 6", Class.NO_CLASS, Race.MONSTER));
+    }
+
+    public ArrayList<Player> getValidList() {
+        if (isOffDisplayMonster()){
+            return getMob_list();
+        }
+        else {
+            return getAll_player_list();
+        }
     }
 
 //    Cette fonction permet d'appliquer une liste de joueur pour adapter l'affichage
-    public void applyListOff(ArrayList<Player> list, Context context) {
-        setDisplay_player_list_off(list);
+    public void applyListOff(Context context) {
+        ArrayList<Player> list = getValidList();
         int i = 0;
         for (ImageButton button : getButtons_off_list()) {
-            button.setImageResource(getRessourceImageRace(list.get(i).get_race().toString(), context));
+            button.setImageResource(list.get(i).getRessourceIdRace(context));
             i++;
         }
 
@@ -116,7 +128,7 @@ public class FightModel {
         getPseudo5off().setText(list.get(4).get_name());
         getPseudo6off().setText(list.get(5).get_name());
 
-        showNotAvailablePlayers(list, true);
+        actualizeView();
     }
 
 //    Si le nombre de joueur est inferieur à 6 alors on construit la liste pour afficher tout de même les autres joueurs
@@ -142,6 +154,65 @@ public class FightModel {
         return allPlayers;
     }
 
+    public void regenerateIds() {
+        ArrayList<Player> theList = new ArrayList<>();
+        theList.addAll(getAll_player_list());
+        theList.addAll(getMob_list());
+
+        for (Player player : theList) {
+            player.generateId();
+        }
+    }
+
+//    Cette méthode permet de renvoyer tous les joueurs (joueurs plus monstre) qui ne sont pas dans
+//    la liste donnée (+le joueur qui est le joueur sélectionné)
+//    Cela sert à construire une liste pour le défilement despersonnages
+    public ArrayList<Player> getPlayersNotInTheList(ArrayList<Player> playersNotWanted){
+        ArrayList<Player> theList = new ArrayList<>();
+        ArrayList<Player> list2Return = new ArrayList<>();
+        theList.addAll(getAll_player_list());
+        theList.addAll(getMob_list());
+        for (Player player : theList){
+            if (!doesContainsRace(playersNotWanted, player.get_race()) || player.get_race() == Race.MONSTER){
+                if (!player.get_name().equals(""))
+                    //Pas de doublons ! le personnage a déjà été ajouté en tout premier avnat l'appel à cette fonction
+                    list2Return.add(player);
+            }
+        }
+        return list2Return;
+    }
+
+    public ArrayList<Player> getValidPlayers(ArrayList<Player> players2Test){
+        ArrayList<Player> list2Return = new ArrayList<>();
+        for (Player player : players2Test){
+        if ((!player.get_name().equals("") && player.get_life() > 0) || player.get_race()== Race.MONSTER)
+            list2Return.add(player);
+        }
+        return list2Return;
+    }
+
+    public boolean doesContainsRace(ArrayList<Player> list, Race race) {
+        for (Player player :list) {
+            if (player.get_race() == race)
+                return true;
+        }
+        return false;
+    }
+
+    public boolean doesContainsId(ArrayList<Player> list, int id) {
+        for (Player player :list) {
+            if (player.getId() == id)
+                return true;
+        }
+        return false;
+    }
+
+    public void suprTempDatas(ArrayList<Player> list){
+        for (Player player : list) {
+            player.deleteTempDatas();
+        }
+    }
+
 //    Cette méthode permet de définir si le player est disponible pour être sélectionné (change
 //    un boolean dans le player
 //    Conditions :
@@ -159,8 +230,9 @@ public class FightModel {
     }
 
 //    Cette méthode grise les joueurs non sélectionnable
-    public void showNotAvailablePlayers(ArrayList<Player> listOfPlayers, boolean isOff){
-        int i = 0;
+    public void showNotAvailablePlayersOff(ArrayList<Player> listOfPlayers){
+        int i =0;
+        testPlayersAvailable(listOfPlayers);
         for (Player player :listOfPlayers) {
             if (!player.get_isSelectable()) {
                 getButtons_off_list().get(i).setAlpha(120);
@@ -172,28 +244,87 @@ public class FightModel {
         }
     }
 
+    public void showGreenBordersOff(ArrayList<Player> listOfPlayers){
+        int i = 0;
+        for (Player p : listOfPlayers) {
+            if (p.get_statu() == Statu.OFF){
+                getGreen_borders_off_list().get(i).setVisibility(View.VISIBLE);
+            }
+            else {
+                getGreen_borders_off_list().get(i).setVisibility(View.INVISIBLE);
+            }
+            i++;
+        }
+    }
+
+    public void actionPlayerLongClick(int position) {
+        ArrayList<Player> list = new ArrayList<>();
+        Player player;
+        player = getValidList().get(position);
+//        Si le joueur n'est pas déjà dans la liste des attaquants'
+//        if (!doesContainsRace(getPlayer_list_off(), player.get_race()))
+//            list.add(player);
+//        list.addAll(getPlayer_list_off());
+//        list.addAll(getPlayersNotInTheList(getPlayer_list_off()));
+        list.addAll(getValidPlayers(getAll_player_list()));
+        list.addAll(getValidPlayers(getMob_list()));
+
+//
+//                La liste est composée :
+//                du joueur/monstre sélectioné
+//                De tous les joueurs/monstres off
+//                De tous les autres joueurs/monstres
+        final PopUpEditPlayer popUp = new PopUpEditPlayer(getActivity(), list, getPositionById(list, player.getId()));
+        popUp.getButtonValid().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                On teste les deux listes (joueurs et monstres) pour trouver chaque joueur
+//                potentiellement modifié et on effectue les modifs
+                popUp.setDatasToPlayer();
+                for (Player player : popUp.getPlayer_list()) {
+                    if (doesContainsId(getValidList(), player.getId())){
+                        getValidList().get(getPositionById(getValidList(), player.getId())).setPlayer(player);
+                    }
+//                    else if (doesContainsId(getMob_list(), player.getId())) {
+//                        getMob_list().get(getPositionById(getMob_list(), player.getId())).setPlayer(player);
+//                    }
+                }
+                actualizeView();
+                popUp.dismiss();
+            }
+        });
+        popUp.build();
+    }
+
+
 //    Réalise l'action les actions nécéssaires lorsqu'un joueur est sélectionné
     public void actionPlayerSelectOff(int i, Context context){
-        Player player = buildListPlayer(getPlayer_list()).get(i);
+        Player player = null;
+        player = getValidList().get(i);
+
         if (player.get_isSelectable()){
-            if (player.getStatu() == Statu.DEF){
-//                    Si le joueur est sélectionné en défense
+            if (player.get_statu() == Statu.DEF){
+//              Si le joueur est sélectionné en défense
                 Toast.makeText(context, "Ce joueur est déjà sélectionné dans l'équipe adverse", Toast.LENGTH_SHORT).show();
             }
             else {
-                if (player.getStatu() == Statu.NOTHING){
-//                    Si le joueur n'est pas encore sélectionné
+                if (player.get_statu() == Statu.NOTHING){
+//                  Si le joueur n'est pas encore sélectionné
+                    player.set_statu(Statu.OFF);
                     getPlayer_list_off().add(player);
-                    getPlayer_list().get(getPositionByRace(getPlayer_list(), player.get_race())).setStatu(Statu.OFF);
-                    getGreen_borders_off_list().get(i).setVisibility(View.VISIBLE);
+                    getValidList().get(getPositionById(getValidList(), player.getId())).set_statu(Statu.OFF);
+//                    getPlayer_list().get(getPositionByRace(getPlayer_list(), player.get_race())).set_statu(Statu.OFF);
+                    actualizeView();
                 }
                 else {
 //                Si le joueur est déjà sélectionné
-                    getPlayer_list_off().remove(getPositionByRace(getPlayer_list_off(), player.get_race()));
-                    getPlayer_list().get(getPositionByRace(getPlayer_list(), player.get_race())).setStatu(Statu.NOTHING);
-                    getGreen_borders_off_list().get(i).setVisibility(View.INVISIBLE);
+                    player.set_statu(Statu.NOTHING);
+                    getPlayer_list_off().remove(getPositionById(getPlayer_list_off(), player.getId()));
+                    getValidList().get(getPositionById(getValidList(), player.getId())).set_statu(Statu.NOTHING);
+//                    getPlayer_list().get(getPositionByRace(getPlayer_list(), player.get_race())).set_statu(Statu.NOTHING);
+                    actualizeView();
                 }
-                ActualizeTotalOff();
+                actualizeView();
             }
         }
         if (player.get_life() <= 0){
@@ -202,6 +333,14 @@ public class FightModel {
         if (player.get_name().equals("")){
             Toast.makeText(context, "Ce joueur n'est pas dans la partie !", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void actualizeView() {
+        ArrayList<Player> list = getValidList();
+        ActualizeTotalOff();
+        showNotAvailablePlayersOff(list);
+        showGreenBordersOff(list);
+        //TODO actualiser def aussi
     }
 
 //    Actualise l'affichage du total de l'équipe offensive
@@ -220,12 +359,6 @@ public class FightModel {
         getTotalOffOff().setText(Integer.toString(totalOff));
         getTotalLifeOff().setText(Integer.toString(totalLife));
 
-    }
-
-    private int getRessourceImageRace(String raceName, Context context) {
-        String ressourceName1 = "race_" + raceName;
-        int resId1 = context.getResources().getIdentifier(ressourceName1.toLowerCase(), "drawable", context.getPackageName());
-        return resId1;
     }
 
     public Bonus getBonusById(int id) {
@@ -284,6 +417,17 @@ public class FightModel {
         return i;
     }
 
+    //Permet d'identifier les vrais joueurs du jeu
+    public ArrayList<Player> getPlayer_list() {
+        ArrayList<Player> list2Return = new ArrayList<>();
+        for (Player player : getAll_player_list()) {
+            if (!player.get_name().equals("")){
+                list2Return.add(player);
+            }
+        }
+        return list2Return;
+    }
+
     //    Renvoie la position d'un joueur dans une liste en fonction de sa race, attention cela suppose
 //    que la race est un identifiant !
     public int getPositionByRace(ArrayList<Player> list, Race race){
@@ -328,22 +472,13 @@ public class FightModel {
         this.fight_button = fight_button;
     }
 
-    public ArrayList<Player> getDisplay_player_list_off() {
-        return display_player_list_off;
+    public ArrayList<Player> getAll_player_list() {
+        return all_player_list;
     }
 
-    public ArrayList<Player> getDisplay_player_list_def() {
-        return display_player_list_def;
+    public void setAll_player_list(ArrayList<Player> all_player_list) {
+        this.all_player_list = all_player_list;
     }
-
-    public void setDisplay_player_list_def(ArrayList<Player> display_player_list_def) {
-        this.display_player_list_def = display_player_list_def;
-    }
-
-    public void setDisplay_player_list_off(ArrayList<Player> display_player_list_off) {
-        this.display_player_list_off = display_player_list_off;
-    }
-
 
     public ImageView getValid1off() {
         return Valid1off;
@@ -633,14 +768,6 @@ public class FightModel {
         Pseudo6def = pseudo6def;
     }
 
-    public ArrayList<Player> getPlayer_list() {
-        return player_list;
-    }
-
-    public void setPlayer_list(ArrayList<Player> player_list) {
-        this.player_list = player_list;
-    }
-
     public ArrayList<Player> getPlayer_list_off() {
         return player_list_off;
     }
@@ -747,5 +874,25 @@ public class FightModel {
 
     public void setTotalLifeOff(TextView totalLifeOff) {
         TotalLifeOff = totalLifeOff;
+    }
+
+    public boolean isOffDisplayMonster() {
+        return OffDisplayMonster;
+    }
+
+    public void setOffDisplayMonster(boolean offDisplayMonster) {
+        OffDisplayMonster = offDisplayMonster;
+    }
+
+    public boolean isDefDisplayMonster() {
+        return DefDisplayMonster;
+    }
+
+    public void setDefDisplayMonster(boolean defDisplayMonster) {
+        DefDisplayMonster = defDisplayMonster;
+    }
+
+    public String getFILE_NAME_MOBS() {
+        return FILE_NAME_MOBS;
     }
 }

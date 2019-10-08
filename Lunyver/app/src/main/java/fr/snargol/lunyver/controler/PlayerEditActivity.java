@@ -99,12 +99,8 @@ public class PlayerEditActivity extends AppCompatActivity {
                         playerAttack.setText(String.valueOf(getPlayer_list().get(getPosition()).get_attack()));
                         playerDefense.setText(String.valueOf(getPlayer_list().get(getPosition()).get_defense()));
                         playerLife.setText(String.valueOf(getPlayer_list().get(getPosition()).get_life()));
-                        String ressourceName1 = "race_" + getPlayer_list().get(getPosition()).get_race();
-                        int resId1 = getApplicationContext().getResources().getIdentifier(ressourceName1.toLowerCase(), "drawable", getApplicationContext().getPackageName());
-                        buttonRace.setImageResource(resId1);
-                        String ressourceName2 = "class_" + getPlayer_list().get(getPosition()).get_class();
-                        int resId2 = getApplicationContext().getResources().getIdentifier(ressourceName2.toLowerCase(), "drawable", getApplicationContext().getPackageName());
-                        buttonClass.setImageResource(resId2);
+                        buttonRace.setImageResource(getPlayer_list().get(getPosition()).getRessourceIdRace(getApplicationContext()));
+                        buttonClass.setImageResource(getPlayer_list().get(getPosition()).getRessourceIdClass(getApplicationContext()));
                         popUp.dismiss();
                     }
                 });

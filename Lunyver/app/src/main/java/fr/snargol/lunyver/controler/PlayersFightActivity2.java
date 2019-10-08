@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -31,14 +30,22 @@ public class PlayersFightActivity2 extends AppCompatActivity {
         setDatas();
 
         ArrayList<Player> list = loadData(model.getFILE_NAME());
-        model.setPlayer_list(list);
 //            setPlayer_list_off(loadDatas(FILE_NAME_OFF));
 //            setPlayer_list_def(loadDatas(FILE_NAME_DEF));
 
         model.setActivity(this);
 
+        //On supprime les données temporaires des joueurs pour qu'ils ne soient plus sélectionnés
+        model.setAll_player_list(model.buildListPlayer(list));
+        model.setMob_list(loadData(model.getFILE_NAME_MOBS()));
+        model.suprTempDatas(model.getAll_player_list());
+        model.suprTempDatas(model.getMob_list());
+        model.regenerateIds();
+
 //        On actualise les texts pour qu'ils correspondent aux noms des joueurs
-        model.applyListOff(model.buildListPlayer(model.getPlayer_list()), getApplicationContext());
+        model.applyListOff(getApplicationContext());
+//        On regénère les ids des joueurs pour éviter les doublons
+
 
         model.getFight_button().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +66,7 @@ public class PlayersFightActivity2 extends AppCompatActivity {
                     public void onClick(View v) {
                         popUp.dismiss();
                         saveData(model.getPlayer_list(), model.getFILE_NAME());
-
+                        saveData(model.getMob_list(), model.getFILE_NAME_MOBS());
                         Intent playersActivity = new Intent(getApplicationContext(), PlayersActivity.class);
                         startActivity(playersActivity);
                         finish();
@@ -75,7 +82,8 @@ public class PlayersFightActivity2 extends AppCompatActivity {
             public void onClick(View v) {
                 model.getArrowRightOff().setVisibility(View.INVISIBLE);
                 model.getArrowLeftOff().setVisibility(View.VISIBLE);
-                model.applyListOff(model.getMob_list(), getApplicationContext());
+                model.setOffDisplayMonster(true);
+                model.applyListOff(getApplicationContext());
             }
         });
 
@@ -85,7 +93,8 @@ public class PlayersFightActivity2 extends AppCompatActivity {
             public void onClick(View v) {
                 model.getArrowLeftOff().setVisibility(View.INVISIBLE);
                 model.getArrowRightOff().setVisibility(View.VISIBLE);
-                model.applyListOff(model.buildListPlayer(model.getPlayer_list()), getApplicationContext());
+                model.setOffDisplayMonster(false);
+                model.applyListOff(getApplicationContext());
             }
         });
 
@@ -129,6 +138,54 @@ public class PlayersFightActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 model.actionPlayerSelectOff(5, getApplicationContext());
+            }
+        });
+
+        model.getButton1off().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                model.actionPlayerLongClick(0);
+                return false;
+            }
+        });
+
+        model.getButton2off().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                model.actionPlayerLongClick(1);
+                return false;
+            }
+        });
+
+        model.getButton3off().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                model.actionPlayerLongClick(2);
+                return false;
+            }
+        });
+
+        model.getButton4off().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                model.actionPlayerLongClick(3);
+                return false;
+            }
+        });
+
+        model.getButton5off().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                model.actionPlayerLongClick(4);
+                return false;
+            }
+        });
+
+        model.getButton6off().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                model.actionPlayerLongClick(5);
+                return false;
             }
         });
 
@@ -186,7 +243,7 @@ public class PlayersFightActivity2 extends AppCompatActivity {
         super.onBackPressed();
         Intent activity = new Intent(getApplicationContext(), PlayersActivity.class);
         saveData(model.getPlayer_list(), model.getFILE_NAME());
-
+        saveData(model.getMob_list(), model.getFILE_NAME_MOBS());
         startActivity(activity);
         finish();
     }
