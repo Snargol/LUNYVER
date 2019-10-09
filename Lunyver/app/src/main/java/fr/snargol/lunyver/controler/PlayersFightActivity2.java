@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -44,38 +45,45 @@ public class PlayersFightActivity2 extends AppCompatActivity {
 
 //        On actualise les texts pour qu'ils correspondent aux noms des joueurs
         model.applyListOff(getApplicationContext());
+        model.applyListDef(getApplicationContext());
 //        On regénère les ids des joueurs pour éviter les doublons
 
 
         model.getFight_button().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Fight fight = new Fight(model.getPlayer_list_off(), model.getPlayer_list_def(), model.getBonus_list());
-                fight.startFight();
+                if (model.getPlayer_list_off().size() > 0 && model.getPlayer_list_def().size() > 0) {
+                    final Fight2 fight = new Fight2(model.getPlayer_list_off(), model.getPlayer_list_def());
+                    fight.startFight();
 
-                final PopUpConfirm popUp = new PopUpConfirm(model.getActivity());
-                popUp.setTitle("Les gagnants sont les "+fight.getWinner() + "s !");
-                popUp.getButtonAnnul().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        popUp.dismiss();
-                    }
-                });
-                popUp.getButtonValid().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        popUp.dismiss();
-                        saveData(model.getPlayer_list(), model.getFILE_NAME());
-                        saveData(model.getMob_list(), model.getFILE_NAME_MOBS());
-                        Intent playersActivity = new Intent(getApplicationContext(), PlayersActivity.class);
-                        startActivity(playersActivity);
-                        finish();
-                    }
-                });
-                popUp.build();
+                    final PopUpConfirm popUp = new PopUpConfirm(model.getActivity());
+                    popUp.setTitle("Les gagnants sont les " + fight.getWinner() + "s !");
+                    popUp.getButtonAnnul().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popUp.dismiss();
+                        }
+                    });
+                    popUp.getButtonValid().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popUp.dismiss();
+                            saveData(model.getPlayer_list(), model.getFILE_NAME());
+                            saveData(model.getMob_list(), model.getFILE_NAME_MOBS());
+                            Intent playersActivity = new Intent(getApplicationContext(), PlayersActivity.class);
+                            startActivity(playersActivity);
+                            finish();
+                        }
+                    });
+                    popUp.build();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Veuillez sélectionner au moins un joueur dans chaque équipe.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
+        // --------------------ATTAQUE--------------------------------
 //        Afficher les monstres
         model.getArrowRightOff().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,8 +105,33 @@ public class PlayersFightActivity2 extends AppCompatActivity {
                 model.applyListOff(getApplicationContext());
             }
         });
+        //-----------------------------------------------------------------
+        // --------------------DEFENSE-------------------------------------
+//        Afficher les monstres
+        model.getArrowRightDef().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                model.getArrowRightDef().setVisibility(View.INVISIBLE);
+                model.getArrowLeftDef().setVisibility(View.VISIBLE);
+                model.setDefDisplayMonster(true);
+                model.applyListDef(getApplicationContext());
+            }
+        });
 
-//        setonclicklisteneer pour les sélections de joueur off
+//        Afficher les joueurs
+        model.getArrowLeftDef().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                model.getArrowLeftDef().setVisibility(View.INVISIBLE);
+                model.getArrowRightDef().setVisibility(View.VISIBLE);
+                model.setDefDisplayMonster(false);
+                model.applyListDef(getApplicationContext());
+            }
+        });
+        //-----------------------------------------------------------------
+        // --------------------ATTAQUE-------------------------------------
+
+//        set onclicklisteneer pour les sélections de joueur off
         model.getButton1off().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,7 +177,7 @@ public class PlayersFightActivity2 extends AppCompatActivity {
         model.getButton1off().setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                model.actionPlayerLongClick(0);
+                model.actionPlayerLongClick(0, true);
                 return false;
             }
         });
@@ -152,7 +185,7 @@ public class PlayersFightActivity2 extends AppCompatActivity {
         model.getButton2off().setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                model.actionPlayerLongClick(1);
+                model.actionPlayerLongClick(1, true);
                 return false;
             }
         });
@@ -160,7 +193,7 @@ public class PlayersFightActivity2 extends AppCompatActivity {
         model.getButton3off().setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                model.actionPlayerLongClick(2);
+                model.actionPlayerLongClick(2, true);
                 return false;
             }
         });
@@ -168,7 +201,7 @@ public class PlayersFightActivity2 extends AppCompatActivity {
         model.getButton4off().setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                model.actionPlayerLongClick(3);
+                model.actionPlayerLongClick(3, true);
                 return false;
             }
         });
@@ -176,7 +209,7 @@ public class PlayersFightActivity2 extends AppCompatActivity {
         model.getButton5off().setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                model.actionPlayerLongClick(4);
+                model.actionPlayerLongClick(4, true);
                 return false;
             }
         });
@@ -184,10 +217,103 @@ public class PlayersFightActivity2 extends AppCompatActivity {
         model.getButton6off().setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                model.actionPlayerLongClick(5);
+                model.actionPlayerLongClick(5, true);
                 return false;
             }
         });
+        //-----------------------------------------------------------------
+        // --------------------DEFENSE-------------------------------------
+//        set onclicklisteneer pour les sélections de joueur def
+        model.getButton1def().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                model.actionPlayerSelectDef(0, getApplicationContext());
+            }
+        });
+
+        model.getButton2def().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                model.actionPlayerSelectDef(1, getApplicationContext());
+            }
+        });
+
+        model.getButton3def().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                model.actionPlayerSelectDef(2, getApplicationContext());
+            }
+        });
+
+        model.getButton4def().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                model.actionPlayerSelectDef(3, getApplicationContext());
+            }
+        });
+
+        model.getButton5def().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                model.actionPlayerSelectDef(4, getApplicationContext());
+            }
+        });
+
+        model.getButton6def().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                model.actionPlayerSelectDef(5, getApplicationContext());
+            }
+        });
+
+        model.getButton1def().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                model.actionPlayerLongClick(0, false);
+                return false;
+            }
+        });
+
+        model.getButton2def().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                model.actionPlayerLongClick(1, false);
+                return false;
+            }
+        });
+
+        model.getButton3def().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                model.actionPlayerLongClick(2, false);
+                return false;
+            }
+        });
+
+        model.getButton4def().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                model.actionPlayerLongClick(3, false);
+                return false;
+            }
+        });
+
+        model.getButton5def().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                model.actionPlayerLongClick(4, false);
+                return false;
+            }
+        });
+
+        model.getButton6def().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                model.actionPlayerLongClick(5, false);
+                return false;
+            }
+        });
+        //-----------------------------------------------------------------
 
     }
 
@@ -214,13 +340,45 @@ public class PlayersFightActivity2 extends AppCompatActivity {
         model.setPseudo5off((TextView) findViewById(R.id.players_fight_pseudo_text_5_off));
         model.setPseudo6off((TextView) findViewById(R.id.players_fight_pseudo_text_6_off));
 
-        model.setFight_button((Button) findViewById(R.id.players_fight_button_fight));
         model.setArrowRightOff((ImageButton) findViewById(R.id.players_fight_off_right_arrow));
         model.setArrowLeftOff((ImageButton) findViewById(R.id.players_fight_off_left_arrow));
 
         model.setTotalDefOff((TextView) findViewById(R.id.players_fight_text_total_off_def));
         model.setTotalOffOff((TextView) findViewById(R.id.players_fight_text_total_off_off));
         model.setTotalLifeOff((TextView) findViewById(R.id.players_fight_text_total_off_life));
+
+
+
+        model.setButton1def((ImageButton) findViewById(R.id.players_fight_select_button_1_def));
+        model.setButton2def((ImageButton) findViewById(R.id.players_fight_select_button_2_def));
+        model.setButton3def((ImageButton) findViewById(R.id.players_fight_select_button_3_def));
+        model.setButton4def((ImageButton) findViewById(R.id.players_fight_select_button_4_def));
+        model.setButton5def((ImageButton) findViewById(R.id.players_fight_select_button_5_def));
+        model.setButton6def((ImageButton) findViewById(R.id.players_fight_select_button_6_def));
+
+        model.setValid1def((ImageView) findViewById(R.id.players_fight_valid_image_1_def));
+        model.setValid2def((ImageView) findViewById(R.id.players_fight_valid_image_2_def));
+        model.setValid3def((ImageView) findViewById(R.id.players_fight_valid_image_3_def));
+        model.setValid4def((ImageView) findViewById(R.id.players_fight_valid_image_4_def));
+        model.setValid5def((ImageView) findViewById(R.id.players_fight_valid_image_5_def));
+        model.setValid6def((ImageView) findViewById(R.id.players_fight_valid_image_6_def));
+
+        model.setPseudo1def((TextView) findViewById(R.id.players_fight_pseudo_text_1_def));
+        model.setPseudo2def((TextView) findViewById(R.id.players_fight_pseudo_text_2_def));
+        model.setPseudo3def((TextView) findViewById(R.id.players_fight_pseudo_text_3_def));
+        model.setPseudo4def((TextView) findViewById(R.id.players_fight_pseudo_text_4_def));
+        model.setPseudo5def((TextView) findViewById(R.id.players_fight_pseudo_text_5_def));
+        model.setPseudo6def((TextView) findViewById(R.id.players_fight_pseudo_text_6_def));
+
+        model.setArrowRightDef((ImageButton) findViewById(R.id.players_fight_def_right_arrow));
+        model.setArrowLeftDef((ImageButton) findViewById(R.id.players_fight_def_left_arrow));
+
+        model.setTotalDefDef((TextView) findViewById(R.id.players_fight_text_total_def_def));
+        model.setTotalOffDef((TextView) findViewById(R.id.players_fight_text_total_def_off));
+        model.setTotalLifeDef((TextView) findViewById(R.id.players_fight_text_total_def_life));
+
+        model.setFight_button((Button) findViewById(R.id.players_fight_button_fight));
+
 
         //Ajout des boutons et bordures dans une liste pour y accéder facilement et itérativement
         model.getButtons_off_list().add(model.getButton1off());
@@ -236,6 +394,21 @@ public class PlayersFightActivity2 extends AppCompatActivity {
         model.getGreen_borders_off_list().add(model.getValid4off());
         model.getGreen_borders_off_list().add(model.getValid5off());
         model.getGreen_borders_off_list().add(model.getValid6off());
+
+
+        model.getButtons_def_list().add(model.getButton1def());
+        model.getButtons_def_list().add(model.getButton2def());
+        model.getButtons_def_list().add(model.getButton3def());
+        model.getButtons_def_list().add(model.getButton4def());
+        model.getButtons_def_list().add(model.getButton5def());
+        model.getButtons_def_list().add(model.getButton6def());
+
+        model.getGreen_borders_def_list().add(model.getValid1def());
+        model.getGreen_borders_def_list().add(model.getValid2def());
+        model.getGreen_borders_def_list().add(model.getValid3def());
+        model.getGreen_borders_def_list().add(model.getValid4def());
+        model.getGreen_borders_def_list().add(model.getValid5def());
+        model.getGreen_borders_def_list().add(model.getValid6def());
     }
 
     @Override
