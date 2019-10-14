@@ -1,4 +1,4 @@
-package fr.snargol.lunyver.controler;
+package fr.snargol.lunyver.model;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -12,12 +12,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import fr.snargol.lunyver.model.Bonus;
 import fr.snargol.lunyver.model.Enums.Class;
 import fr.snargol.lunyver.model.Enums.Race;
 import fr.snargol.lunyver.model.Enums.Statu;
-import fr.snargol.lunyver.model.Player;
-import fr.snargol.lunyver.model.PopUpEditPlayer;
 
 public class FightModel {
 //    Il y a trop d'arguments, ils sont donc stoqués dans le model pour éviter de s'y perdre

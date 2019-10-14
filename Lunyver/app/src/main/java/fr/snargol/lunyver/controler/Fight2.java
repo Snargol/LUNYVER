@@ -36,10 +36,10 @@ public class Fight2 {
             }
         }
         if (areDefeated(getList_off())){
-            winner = "Défenseur";
+            winner = "défenseurs";
         }
         else {
-            winner = "Attaquant";
+            winner = "attaquants";
         }
     }
 

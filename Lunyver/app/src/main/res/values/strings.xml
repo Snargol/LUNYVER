@@ -25,4 +25,6 @@
     <string name="mob_title">Monstres</string>
     <string name="title_add_bonus">Ajouter un bonus</string>
     <string name="default_text">LUNYVER</string>
+    <string name="continue_winner_off">Les attaquants remportent le combat. Voulez vous continuer ?</string>
+    <string name="off_winner">Victoire des attaquants !</string>
 </resources>

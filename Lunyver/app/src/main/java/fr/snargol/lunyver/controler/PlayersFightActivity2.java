@@ -18,8 +18,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import fr.snargol.lunyver.R;
+import fr.snargol.lunyver.model.FightModel;
 import fr.snargol.lunyver.model.Player;
 import fr.snargol.lunyver.model.PopUpConfirm;
+import fr.snargol.lunyver.model.PopUpDisplayFightResult;
 
 public class PlayersFightActivity2 extends AppCompatActivity {
     FightModel model = new FightModel();
@@ -56,15 +58,14 @@ public class PlayersFightActivity2 extends AppCompatActivity {
                     final Fight2 fight = new Fight2(model.getPlayer_list_off(), model.getPlayer_list_def());
                     fight.startFight();
 
-                    final PopUpConfirm popUp = new PopUpConfirm(model.getActivity());
-                    popUp.setTitle("Les gagnants sont les " + fight.getWinner() + "s !");
-                    popUp.getButtonAnnul().setOnClickListener(new View.OnClickListener() {
+                    final PopUpDisplayFightResult popUp = new PopUpDisplayFightResult(model.getActivity(), model.getPlayer_list_off(), model.getPlayer_list_def(), fight.getWinner());
+                    popUp.getAnnul().setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             popUp.dismiss();
                         }
                     });
-                    popUp.getButtonValid().setOnClickListener(new View.OnClickListener() {
+                    popUp.getValid().setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             popUp.dismiss();
@@ -76,6 +77,27 @@ public class PlayersFightActivity2 extends AppCompatActivity {
                         }
                     });
                     popUp.build();
+
+//                    final PopUpConfirm popUp = new PopUpConfirm(model.getActivity());
+//                    popUp.setTitle("Les gagnants sont les " + fight.getWinner() + "s !");
+//                    popUp.getButtonAnnul().setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            popUp.dismiss();
+//                        }
+//                    });
+//                    popUp.getButtonValid().setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            popUp.dismiss();
+//                            saveData(model.getPlayer_list(), model.getFILE_NAME());
+//                            saveData(model.getMob_list(), model.getFILE_NAME_MOBS());
+//                            Intent playersActivity = new Intent(getApplicationContext(), PlayersActivity.class);
+//                            startActivity(playersActivity);
+//                            finish();
+//                        }
+//                    });
+//                    popUp.build();
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Veuillez sélectionner au moins un joueur dans chaque équipe.", Toast.LENGTH_SHORT).show();

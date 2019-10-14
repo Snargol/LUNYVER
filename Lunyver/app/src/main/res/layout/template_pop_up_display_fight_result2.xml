@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/pop_up_display_fight_result_text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="center"
+        android:text="@string/fight"
+        android:textSize="@dimen/middle_titre"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/pop_up_display_fight_result_text_winner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/off_winner"
+        android:textSize="@dimen/little_titre"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintEnd_toEndOf="@+id/pop_up_display_fight_result_text_title"
+        app:layout_constraintStart_toStartOf="@+id/pop_up_display_fight_result_text_title"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_display_fight_result_text_title" />
+
+    <Button
+        android:id="@+id/pop_up_display_fight_result_button_select_off"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/button_shape1"
+        android:shadowColor="#A8A8A8"
+        android:text="@string/attaquant"
+        android:textAllCaps="false"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/big_text"
+        app:layout_constraintEnd_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_display_fight_result_text_winner" />
+
+    <Button
+        android:id="@+id/pop_up_display_fight_result_button_select_def"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/button_shape1"
+        android:shadowColor="#A8A8A8"
+        android:text="@string/defenseur"
+        android:textAllCaps="false"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/big_text"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_display_fight_result_text_winner" />
+
+    <ListView
+        android:id="@+id/pop_up_display_fight_result_list"
+        android:layout_width="340dp"
+        android:layout_height="225dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_display_fight_result_button_select_off" />
+
+    <TextView
+        android:id="@+id/pop_up_display_fight_result_text_continue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/continue_winner_off"
+        android:textSize="@dimen/big_text"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_display_fight_result_list" />
+
+    <Button
+        android:id="@+id/pop_up_display_fight_result_button_annul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorRed"
+        android:text="@string/annul"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_display_fight_result_text_continue" />
+
+    <Button
+        android:id="@+id/pop_up_display_fight_result_button_valid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorGreen"
+        android:text="@string/valid"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_display_fight_result_text_continue" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>
