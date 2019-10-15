@@ -2,17 +2,15 @@ package fr.snargol.lunyver.model;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 import fr.snargol.lunyver.R;
-import fr.snargol.lunyver.controler.Adapters.PlayerAdapter;
 import fr.snargol.lunyver.controler.Adapters.PlayerFightDisplayResultAdapter;
 
 public class PopUpDisplayFightResult extends Dialog {
@@ -28,7 +26,7 @@ public class PopUpDisplayFightResult extends Dialog {
     ArrayList<Player> players_list_off;
     ArrayList<Player> players_list_def;
 
-    boolean winner_is_off;
+    private boolean winner_is_off;
 
     public PopUpDisplayFightResult(Activity activity, ArrayList<Player> players_list_off, ArrayList<Player> players_list_def, String winner) {
         super(activity, R.style.Theme_AppCompat_Dialog);
@@ -39,7 +37,7 @@ public class PopUpDisplayFightResult extends Dialog {
         setOnClick();
     }
 
-    public void setDatas(String winner) {
+    private void setDatas(String winner) {
         setWinner_title((TextView) findViewById(R.id.pop_up_display_fight_result_text_winner));
         setContinue_winner((TextView) findViewById(R.id.pop_up_display_fight_result_text_continue));
         setValid((Button) findViewById(R.id.pop_up_display_fight_result_button_valid));
@@ -51,12 +49,13 @@ public class PopUpDisplayFightResult extends Dialog {
         getWinner_title().setText("Victoire des "+winner+" !");
         getContinue_winner().setText("Les "+winner+" remportent le combat. \n Voulez vous continuer ?");
 
-//TODO erreur à ce niveau (crash appli lors d'un fight)
+        getSelect_off().setBackground(ContextCompat.getDrawable(getContext(), R.drawable.button_shape2));
+
         PlayerFightDisplayResultAdapter playerAdapter = new PlayerFightDisplayResultAdapter(getContext(), players_list_off , getNames(getPlayers_list_off()));
         getPlayer_list_view().setAdapter(playerAdapter);
     }
 
-    public String[] getNames(ArrayList<Player> list) {
+    private String[] getNames(ArrayList<Player> list) {
         String[] names = new String[list.size()];
         int i = 0;
         for (Player player: list
@@ -68,31 +67,40 @@ public class PopUpDisplayFightResult extends Dialog {
         return names;
     }
 
-    public void setOnClick() {
+    private void setOnClick() {
         getSelect_off().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                getSelect_off().setBackground(ContextCompat.getDrawable(getContext(), R.drawable.button_shape2));
+                getSelect_def().setBackground(ContextCompat.getDrawable(getContext(), R.drawable.button_shape1));
+                setListOnView(getPlayers_list_off());
             }
         });
 
         getSelect_def().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                getSelect_off().setBackground(ContextCompat.getDrawable(getContext(), R.drawable.button_shape1));
+                getSelect_def().setBackground(ContextCompat.getDrawable(getContext(), R.drawable.button_shape2));
+                setListOnView(getPlayers_list_def());
             }
         });
+    }
+
+    private void setListOnView(ArrayList<Player> list) {
+        PlayerFightDisplayResultAdapter playerAdapter = new PlayerFightDisplayResultAdapter(getContext(), list , getNames(list));
+        getPlayer_list_view().setAdapter(playerAdapter);
     }
 
     public void build(){
         show();
     }
 
-    public ListView getPlayer_list_view() {
+    private ListView getPlayer_list_view() {
         return player_list_view;
     }
 
-    public void setPlayer_list_view(ListView player_list_view) {
+    private void setPlayer_list_view(ListView player_list_view) {
         this.player_list_view = player_list_view;
     }
 

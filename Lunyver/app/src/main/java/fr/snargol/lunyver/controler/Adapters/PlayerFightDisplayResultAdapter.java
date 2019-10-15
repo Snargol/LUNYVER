@@ -2,8 +2,10 @@ package fr.snargol.lunyver.controler.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,9 +52,19 @@ public class PlayerFightDisplayResultAdapter extends ArrayAdapter<String> {
     public void setDatasOnView(Player player, View view){
         TextView playerName = view.findViewById(R.id.adapter_player_display_fight_pseudo);
         playerName.setText(player.get_name());
+        if (player.get_life() > 0)
+            playerName.setTextColor(ContextCompat.getColor(getContext(), R.color.colorGreen));
+        else
+            playerName.setTextColor(ContextCompat.getColor(getContext(), R.color.colorRed));
 
-        TextView playerLife = view.findViewById(R.id.adapter_player_display_fight_life_before);
-        playerLife.setText(player.get_life()+"");
+        TextView playerLifeAfter = view.findViewById(R.id.adapter_player_display_fight_life_after);
+        playerLifeAfter.setText(player.get_life()+"");
+
+        TextView playerLifeBefore = view.findViewById(R.id.adapter_player_display_fight_life_before);
+        playerLifeBefore.setText((player.get_life()+player.get_suffer_damages())+"");
+
+        TextView playerLifeDamage = view.findViewById(R.id.adapter_player_display_fight_suffer_damages);
+        playerLifeDamage.setText("-"+player.get_suffer_damages());
 
         ImageView playerRace= view.findViewById(R.id.adapter_player_display_fight_image_race);
         playerRace.setImageResource(player.getRessourceIdRace(getContext()));

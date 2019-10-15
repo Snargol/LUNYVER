@@ -15,6 +15,7 @@ public class Player implements Serializable {
     private int _attack = 0;
     private int _defense = 0;
     private int _life = 20;
+    private int _suffer_damages = 0;
     private int _bonus_attack = 0;
     private int _bonus_defense = 0;
     private Class _class;
@@ -121,6 +122,7 @@ public class Player implements Serializable {
         set_isSelectable(false);
         set_bonus_attack(0);
         set_bonus_defense(0);
+        set_suffer_damages(0);
     }
 
     public int getRessourceIdRace(Context context) {
@@ -267,5 +269,22 @@ public class Player implements Serializable {
 
     public void set_bonus_defense(int _bonus_defense) {
         this._bonus_defense = _bonus_defense;
+    }
+
+    public int get_suffer_damages() {
+        return _suffer_damages;
+    }
+
+    public void set_suffer_damages(int _suffer_damages) {
+        this._suffer_damages = _suffer_damages;
+    }
+
+    public void add_suffer_damage(int _suffer_damage) {
+        if (get_suffer_damages() + _suffer_damage >= 0)
+            if (get_suffer_damages() + _suffer_damage > get_life())
+                set_suffer_damages(get_life());
+            else
+                this._suffer_damages += _suffer_damage;
+
     }
 }

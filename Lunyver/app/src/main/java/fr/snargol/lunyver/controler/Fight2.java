@@ -126,8 +126,12 @@ public class Fight2 {
 
     private void attack(Player playerOff, Player playerDef) {
         if ((playerOff.get_attack() + playerOff.get_bonus_attack()) - (playerDef.get_defense() + playerDef.get_bonus_defense()) > 0){
-            playerDef.add_life(-((playerOff.get_attack() + playerOff.get_bonus_attack() )
+            //            Enregistrement des dommages subis pour l'affichage
+            playerDef.add_suffer_damage(((playerOff.get_attack() + playerOff.get_bonus_attack() )
                     - (playerDef.get_defense() + playerDef.get_bonus_defense())));
+            playerDef.add_life(-((playerOff.get_attack() + playerOff.get_bonus_attack())
+                    - (playerDef.get_defense() + playerDef.get_bonus_defense())));
+
         }
     }
 

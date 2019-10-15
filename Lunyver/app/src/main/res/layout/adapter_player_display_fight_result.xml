@@ -16,7 +16,8 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="TextView"
+        android:text="Name"
+        android:gravity="center"
         android:textAlignment="center"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/little_titre"
@@ -33,7 +34,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintBottom_toBottomOf="@+id/adapter_player_display_fight_suffer_damages"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.695"
@@ -109,14 +110,13 @@
         app:srcCompat="@drawable/arrow_right" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/adapter_player_display_fight_suffer_damages"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="-10"
         android:textColor="@color/colorRed"
         android:textSize="@dimen/big_text"
         app:layout_constraintEnd_toEndOf="@+id/imageView10"
-        app:layout_constraintHorizontal_bias="0.191"
         app:layout_constraintStart_toStartOf="@+id/imageView10"
         app:layout_constraintTop_toBottomOf="@+id/imageView10" />
 
@@ -127,8 +127,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         app:layout_constraintEnd_toEndOf="@+id/imageView10"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintStart_toEndOf="@+id/adapter_player_display_fight_suffer_damages"
         app:layout_constraintTop_toBottomOf="@+id/imageView10"
         app:srcCompat="@drawable/heart" />
 </android.support.constraint.ConstraintLayout>
